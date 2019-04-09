@@ -1,5 +1,15 @@
-<h1>New Channel</h1>
+<% provide(:title, 'New Channel') %>
+<h1 class="title">New channel</h1>
 
-<%= render 'form', channel: @channel, categories: @categories%>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@channel) do |f| %>
+      <%= render 'shared/error_messages', obj: @channel %>
 
-<%= link_to 'Back', channels_path %>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter channel name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Create new channel", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

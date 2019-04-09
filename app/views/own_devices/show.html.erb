@@ -1,0 +1,25 @@
+<h1 class="title">Device list</h1>
+<% if @devices == nil %>
+  <span>Ops, no device yet, please contact admin.</span>
+<% else %>
+<div style="margin-bottom: 20px">
+  <%= form_for(update_own_device_path) do %>
+  <ul>
+    <% @devices.each do |device| %>  
+    <li>
+      <% if @own_devices.include?(device.id) %>
+        <%= check_box_tag "items[]", device.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>  
+      <% else %>
+        <%= check_box_tag "items[]", device.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>  
+      <% end %>
+      <%= device.name %> 
+      <!--<%= link_to 'Detail', '#' %>-->
+    </li>
+    <% end %>  
+  </ul>
+  <%= button_to "Submit", class: "btn btn-primary"  %>
+  <% end %>
+  <%= link_to 'Cancel and to back to profile', @user %>
+</div>
+<% end %>
+

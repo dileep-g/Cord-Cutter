@@ -17,7 +17,7 @@ class ChannelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create channel" do
     assert_difference('Channel.count') do
-      post channels_url, params: { channel: {  } }
+      post channels_url, params: { channel: { name: @channel.name } }
     end
 
     assert_redirected_to channel_url(Channel.last)
@@ -34,7 +34,7 @@ class ChannelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update channel" do
-    patch channel_url(@channel), params: { channel: {  } }
+    patch channel_url(@channel), params: { channel: { name: @channel.name } }
     assert_redirected_to channel_url(@channel)
   end
 

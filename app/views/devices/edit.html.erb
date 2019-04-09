@@ -1,0 +1,17 @@
+<% provide(:title, 'Edit Device') %>
+<h1 class="title">Edit device</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@device) do |f| %>
+      <%= render 'shared/error_messages', obj: @device %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter device name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Update device information", class: "btn btn-primary" %>
+    <% end %>
+    <br>
+    <p><%= link_to 'Cancel and return to device information', @device %></p>
+  </div>
+</div>

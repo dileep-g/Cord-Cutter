@@ -1,0 +1,15 @@
+<% provide(:title, 'New Package') %>
+<h1 class="title">New package</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@package) do |f| %>
+      <%= render 'shared/error_messages', obj: @package %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter package name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Create new package", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

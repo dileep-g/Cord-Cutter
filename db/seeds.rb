@@ -5,8 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-channel_name = %w[HBO ABC CBS ESPN FOX KPOP]
-channel_name.each do |c|
-    Channel.create(name: c)
-end

@@ -1,6 +1,10 @@
+<div class= "background">
 <div class= "center jumbotron" >
-  <h1>Cord Cutter Calculator</h1>
-  <%= link_to "Log in now", login_path ,class: "btn btn-primary btn-lg btn-xlarge" %>
-  <%= link_to "Sign up now", signup_path ,class: "btn btn-primary btn-lg btn-xlarge" %>
+  <h1>Cord Cutting Calculator</h1>
+  <% if !logged_in? %>
+    <%= link_to "Log in now", login_path ,class: "btn btn-primary btn-lg btn-xlarge" %>
+    <%= link_to "Sign up now", signup_path ,class: "btn btn-primary btn-lg btn-xlarge" %>
+  <% end %>
+</div>
 </div>
 

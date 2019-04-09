@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CordCutter</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= render 'layouts/navigation' %>
-  <%= render 'layouts/messages' %>
-  <div class= "container">
-    <%= yield %>
-  </div>
-  <%= render 'layouts/footer' %>
-  <!-- %= debug(params) if Rails.env.development? % -->
-</body>
+  <head>
+    <title>Cord Cutting Calculator</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% render 'layouts/shim' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div style="margin-top: 2.5%; margin-bottom: -1%" class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
 </html>

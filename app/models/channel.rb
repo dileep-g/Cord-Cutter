@@ -1,4 +1,13 @@
 class Channel < ApplicationRecord
-  has_and_belongs_to_many :stream_packages
-  has_many :channels_user
+  # Relationship - antenna
+  has_many :antennas
+
+  # Relationship - preferences
+  has_many :perferences
+
+  # Relationship - packages provide
+  has_many :provide_channels
+
+  # Validation - name
+  validates(:name, presence: true, length: { minimum: 1, maximum: 255}, uniqueness: true)
 end

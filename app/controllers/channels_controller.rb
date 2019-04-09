@@ -1,11 +1,11 @@
 class ChannelsController < ApplicationController
-  # before_action :authenticate
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:index, :show, :edit, :update, :destroy]
 
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.all
+    @channels = Channel.order(:name).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /channels/1
@@ -16,12 +16,10 @@ class ChannelsController < ApplicationController
   # GET /channels/new
   def new
     @channel = Channel.new
-    @categories = categories
   end
 
   # GET /channels/1/edit
   def edit
-    @categories = categories
   end
 
   # POST /channels
@@ -29,40 +27,31 @@ class ChannelsController < ApplicationController
   def create
     @channel = Channel.new(channel_params)
 
-    respond_to do |format|
       if @channel.save
-        format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
-        format.json { render :show, status: :created, location: @channel }
+        flash[:success] = "Create success!"
+        redirect_to @channel
       else
-        format.html { render :new }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
+        render 'new'
       end
-    end
   end
 
   # PATCH/PUT /channels/1
   # PATCH/PUT /channels/1.json
   def update
-    puts "[ChannelsController.update] channel from db id: #{@channel.id}, name: #{@channel.name}"
-    respond_to do |format|
       if @channel.update(channel_params)
-        format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
-        format.json { render :show, status: :ok, location: @channel }
+        flash[:success] = "Update success!"
+        redirect_to @channel
       else
-        format.html { render :edit }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
+        render 'edit'
       end
-    end
   end
 
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
     @channel.destroy
-    respond_to do |format|
-      format.html { redirect_to channels_url, notice: 'Channel was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:success] = "Delete success"
+    redirect_to channels_path
   end
 
   private
@@ -73,18 +62,12 @@ class ChannelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
-      params.require(:channel).permit(:name, :category)
+      params.require(:channel).permit(:name)
     end
 
-    def categories
-      [
-        'Entertainment',
-        'Movies',
-        'News',
-        'Other',
-        'Sports',
-        'Science',
-        'TV Shows'
-        ]
+    def admin_user
+      unless admin?
+        redirect_to root_path
+      end
     end
 end

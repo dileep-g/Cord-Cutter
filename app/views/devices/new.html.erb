@@ -1,0 +1,15 @@
+<% provide(:title, 'New Device') %>
+<h1 class="title">New device</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@device) do |f| %>
+      <%= render 'shared/error_messages', obj: @device %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter device name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Create new device", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,33 +1,31 @@
 Rails.application.routes.draw do
-  
+
   root 'pages#home'
-  
-  resources :users
-  resources :stream_packages
+
+  resources :devices
+  resources :set_top_boxes
+  resources :packages
   resources :channels
-  
-  get 'signup', to: 'users#new'
-  
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
-  
-  get 'channels', to: 'channels#index'
-  get 'new_channels', to: 'channels#new'
-  get 'packages', to: 'stream_packages#index'
-  get 'new_packages', to: 'stream_packages#new'
-  get 'home', to: 'pages#home'
+  resources :users
+
+  get '/home', to: 'pages#home'
+
+  get '/signup', to: 'users#new'
+  post '/signup',  to: 'users#create'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+
+  delete '/logout', to: 'sessions#destroy'
+
+  get '/antenna/:id', to: 'antennas#show', as: 'antenna'
+  post '/antenna/:id', to: 'antennas#update_antenna', as: 'update_antenna'
+
+  get '/own_boxes/:id', to: 'own_boxes#show', as: 'own_box'
+  post '/own_boxes/:id', to: 'own_boxes#update_own_set_top_box', as: 'update_own_box'
+
+  get '/own_device/:id', to: 'own_devices#show', as: 'own_device'
+  post '/own_device/:id', to: 'own_devices#update_own_device', as: 'update_own_device'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  # get 'login', to: redirect('/auth/google_oauth2'), as: 'login'
-  # get 'logout', to: 'sessions#destroy', as: 'logout'
-  # get 'auth/:provider/callback', to: 'sessions#create'
-  # get 'auth/failure', to: redirect('/')
-  # get 'signin', to: 'signin#show', as: 'signin'
-  #get 'home', to: 'home#show', as: 'home'
-  #post 'home', to: 'home#show'
-  get 'calculator/:id/input', to: 'calculator#input', as: 'calculator'
-  post 'calculator/:id/recommendation', to: 'calculator#recommendation', as: 'recommendation'
-
-
 end

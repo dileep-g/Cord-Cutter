@@ -1,0 +1,17 @@
+<% provide(:title, 'Edit Set Top Box') %>
+<h1 class="title">Edit set top box</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@set_top_box) do |f| %>
+      <%= render 'shared/error_messages', obj: @set_top_box %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter box name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Update box information", class: "btn btn-primary" %>
+    <% end %>
+    <br>
+    <p><%= link_to 'Cancel and return to box information', @channel %></p>
+  </div>
+</div>

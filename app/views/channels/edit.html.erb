@@ -1,6 +1,17 @@
-<h1>Editing Channel</h1>
+<% provide(:title, 'Edit channel') %>
+<h1 class="title">Edit channel</h1>
 
-<%= render 'form', channel: @channel, categories: @categories %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@channel) do |f| %>
+      <%= render 'shared/error_messages', obj: @channel %>
 
-<%= link_to 'Show', @channel %> |
-<%= link_to 'Back', channels_path %>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter channel name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Update channel information", class: "btn btn-primary" %>
+    <% end %>
+    <br>
+    <p><%= link_to 'Cancel and return to channel information', @channel %></p>
+  </div>
+</div>

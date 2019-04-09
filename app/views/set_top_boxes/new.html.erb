@@ -1,0 +1,15 @@
+<% provide(:title, 'New Set Top Box') %>
+<h1 class="title">New set top box</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@set_top_box) do |f| %>
+      <%= render 'shared/error_messages', obj: @set_top_box %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter box name', autofocus: true, class: 'form-control'%>
+
+      <%= f.submit "Create new box", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

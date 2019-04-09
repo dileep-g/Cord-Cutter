@@ -1,0 +1,22 @@
+<%= form_with(model: set_top_box, local: true) do |form| %>
+  <% if set_top_box.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(set_top_box.errors.count, "error") %> prohibited this set_top_box from being saved:</h2>
+
+      <ul>
+      <% set_top_box.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :set_top_box_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

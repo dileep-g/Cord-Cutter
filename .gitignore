@@ -6,7 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-.DS_STORE
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -14,10 +13,11 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/tmp/*
 !/log/.keep
-/tmp
-log
+!/tmp/.keep
+
+/node_modules
+/yarn-error.log
 
 .byebug_history
-Iter0
-cord-cutter/tmp/**

@@ -1,0 +1,2 @@
+module OwnDevicesHelper
+end
