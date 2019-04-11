@@ -8,11 +8,13 @@
     <% @channels.each do |channel| %>  
       <li>
         <% if @antennas.include?(channel.id) %>
-          <%= check_box_tag "items[]", channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
+          <%= check_box_tag "items[]", channel.id, true, style: "width: 50px; float: left"%>
+          <%= channel.name %> 
         <% else %>
-          <%= check_box_tag "items[]", channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
+          <%= check_box_tag "items[]", channel.id, false, style: "width: 50px; float: left"%>
+          <%= channel.name %> 
         <% end %>
-      <%= channel.name %> 
+      
       <!--<%= link_to 'Detail', '#' %>-->
     </li>
     <% end %>  
