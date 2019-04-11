@@ -1,6 +1,28 @@
   <p style="margin-top: 5%" class="show">
     <strong>Package name:</strong>
    <%= @package.name %>
+    <ul><li>Package cost: $<%= @package.cost %></li></ul>
+    <ul><li>Package channels: </li></ul>
+     <% if @channels == nil %>
+        <span>Ops, no channel yet, please contact admin.</span>
+        <br></br>
+      <% else %>
+      <div style="margin-bottom: 20px">
+
+        <ul>
+          <ul>
+          <% @channels.each do |channel| %>
+            <% if @packages.include?(channel.id) %>
+              <li>
+              <%= channel.name %> 
+             </li>
+            <% end %>
+          <% end %>
+          </ul>  
+        </ul>
+
+      </div>
+      <% end %>
   </p>
 
 <%= link_to 'Edit', edit_package_path(@package) %> |
