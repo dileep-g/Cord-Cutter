@@ -11,15 +11,32 @@ class SetTopBoxesController < ApplicationController
   # GET /set_top_boxes/1
   # GET /set_top_boxes/1.json
   def show
+    @packages = Package.order(:name).all
+    @set_top_boxes = Array.new
+    @set_top_box.support_boxes.each do |support_box|
+      @set_top_boxes << support_box.package_id
+    end
   end
 
   # GET /set_top_boxes/new
   def new
     @set_top_box = SetTopBox.new
+    
+    @packages = Package.order(:name).all
+    @set_top_boxes = Array.new
+    @set_top_box.support_boxes.each do |support_box|
+      @set_top_boxes << support_box.package_id
+    end
   end
 
   # GET /set_top_boxes/1/edit
   def edit
+    @packages = Package.order(:name).all
+    @set_top_boxes = Array.new
+    @set_top_box.support_boxes.each do |support_box|
+      # @packages << provide_channel.channels.channel_id
+      @set_top_boxes << support_box.package_id
+    end
   end
 
   # POST /set_top_boxes
@@ -27,6 +44,8 @@ class SetTopBoxesController < ApplicationController
   def create
     @set_top_box = SetTopBox.new(set_top_box_params)
       if @set_top_box.save
+        current_set_top_box = SetTopBox.find_by(name: @set_top_box.name)
+        SupportBox.create_record(current_set_top_box.id, params[:items])  
         flash[:success] = "Create success!"
         redirect_to @set_top_box
       else
@@ -37,12 +56,14 @@ class SetTopBoxesController < ApplicationController
   # PATCH/PUT /set_top_boxes/1
   # PATCH/PUT /set_top_boxes/1.json
   def update
-      if @set_top_box.update(set_top_box_params)
-        flash[:success] = "Update success!"
-        redirect_to @set_top_box
-      else
-        render 'edit'
-      end
+    SupportBox.delete_record(params[:id])
+    SupportBox.create_record(params[:id], params[:items])
+    if @set_top_box.update(set_top_box_params)
+      flash[:success] = "Update success!"
+      redirect_to @set_top_box
+    else
+      render 'edit'
+    end
   end
 
   # DELETE /set_top_boxes/1

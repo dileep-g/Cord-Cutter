@@ -43,7 +43,7 @@ class PackagesController < ApplicationController
   # POST /packages
   # POST /packages.json
   def create
-    @channels = Channel.order(:name).all
+    # @channels = Channel.order(:name).all
     @package = Package.new(package_params)
 
       if @package.save
