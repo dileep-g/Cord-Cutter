@@ -1,22 +1,11 @@
-<%= form_with(model: set_top_box, local: true) do |form| %>
-  <% if set_top_box.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(set_top_box.errors.count, "error") %> prohibited this set_top_box from being saved:</h2>
+    <%= form_for(@set_top_box) do |f| %>
+      <%= render 'shared/error_messages', obj: @set_top_box %>
 
-      <ul>
-      <% set_top_box.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter box name', autofocus: true, class: 'form-control'%>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :set_top_box_name %>
-  </div>
+      <%= f.label :description %>
+      <%= f.text_field :description, placeholder: 'Enter description', class: 'form-control'%>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>

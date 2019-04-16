@@ -27,5 +27,10 @@ Rails.application.routes.draw do
   get '/own_device/:id', to: 'own_devices#show', as: 'own_device'
   post '/own_device/:id', to: 'own_devices#update_own_device', as: 'update_own_device'
 
+  get '/package/select_origin', to: 'packages#select_origin', as: 'select_origin'
+  get '/package/new_hierarchical/:id', to: 'packages#new_hierarchical', as: 'hierarchical_new'
+
+  get '/users/:id/calculator', to: 'users#calculator', as: 'calculator'
+  post '/users/:id/calculator', to: 'users#calculate', as: 'calculate'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

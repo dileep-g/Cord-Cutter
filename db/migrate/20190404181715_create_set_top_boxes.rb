@@ -2,6 +2,7 @@ class CreateSetTopBoxes < ActiveRecord::Migration[5.1]
   def change
     create_table :set_top_boxes do |t|
       t.string :name, null: false
+      t.string :description
 
       t.timestamps
     end

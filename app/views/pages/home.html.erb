@@ -4,6 +4,8 @@
   <% if !logged_in? %>
     <%= link_to "Log in now", login_path ,class: "btn btn-primary btn-lg btn-xlarge" %>
     <%= link_to "Sign up now", signup_path ,class: "btn btn-primary btn-lg btn-xlarge" %>
+  <% else %>
+    <%= link_to "Calculate", calculator_path(current_user),class: "btn btn-primary btn-lg btn-xlarge" %>
   <% end %>
 </div>
 </div>

@@ -3,38 +3,6 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@set_top_box) do |f| %>
-      <%= render 'shared/error_messages', obj: @set_top_box %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name, placeholder: 'Enter box name', autofocus: true, class: 'form-control'%>
-      
-      <!--Form for packages-->
-      <% if @packages == nil %>
-        <span>Ops, no package yet, please contact admin.</span>
-        <br></br>
-      <% else %>
-      <div style="margin-bottom: 20px">
-
-        <ul>
-          <% @packages.each do |package| %>  
-            <li>
-              <% if @set_top_boxes.include?(package.id) %>
-                <%= check_box_tag "items[]", package.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% else %>
-                <%= check_box_tag "items[]", package.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% end %>
-            <%= package.name %> 
-            <%= link_to 'Detail', '#' %>
-           </li>
-          <% end %>  
-        </ul>
-
-      </div>
-      <% end %>
-      <!--Form for packages-->
-
-      <%= f.submit "Create new box", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>

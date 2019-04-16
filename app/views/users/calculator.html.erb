@@ -1,0 +1,58 @@
+<h1 class="title">Calculator</h1>
+<% if @channels == nil %>
+  <span>Ops, no channel yet, please contact admin.</span>
+<% else %>
+<div style="margin-bottom: 20px">
+  <%= form_for(calculate_path) do %>
+    <div style="margin-bottom: 20px">
+      <h4>Must have channels</h4>
+        <% @channels.each do |channel| %>  
+          <p>
+          <td>
+            <% if @must_have != nil && @must_have.include?(channel.id) %> 
+              <%= check_box_tag 'must_have[]', channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% else %>
+              <%= check_box_tag 'must_have[]', channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% end %>
+              <%= channel.name %> 
+            </td>
+          </p>
+        <% end %>  
+    </div>
+    <div style="margin-bottom: 20px">
+      <h4>Would like to have channels</h4>
+        <% @channels.each do |channel| %>  
+          <p>
+            <td>
+            <% if @would_have != nil && @would_have.include?(channel.id) %> 
+              <%= check_box_tag 'would_have[]', channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% else %>
+              <%= check_box_tag 'would_have[]', channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% end %>
+              <%= channel.name %> 
+            </td>
+          </p>
+        <% end %>  
+    </div>
+    <div style="margin-bottom: 20px">
+      <h4>OK to have channels</h4>
+        <% @channels.each do |channel| %>  
+          <p>
+            <td>
+            <% if @ok_have != nil && @ok_have.include?(channel.id) %> 
+              <%= check_box_tag "ok_have[]", channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% else %>
+              <%= check_box_tag "ok_have[]", channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% end %>
+              <%= channel.name %> 
+            </td>
+          </p>
+        <% end %>  
+    </div>
+    <h4>Budget</h4>
+    <%= text_field 'budget', placeholder: 'Enter package name', class: 'form-control'%>
+  <%= button_to "Calculate", class: "btn btn-primary"  %>
+  <% end %>
+</div>
+<% end %>
+

@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20190404211338) do
 
   create_table "channels", force: :cascade do |t|
     t.string "name", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_channels_on_name", unique: true
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20190404211338) do
 
   create_table "devices", force: :cascade do |t|
     t.string "name", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_devices_on_name", unique: true
@@ -55,7 +57,9 @@ ActiveRecord::Schema.define(version: 20190404211338) do
 
   create_table "packages", force: :cascade do |t|
     t.string "name", null: false
+    t.string "link"
     t.float "cost"
+    t.boolean "DVR"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_packages_on_name", unique: true
@@ -82,6 +86,7 @@ ActiveRecord::Schema.define(version: 20190404211338) do
 
   create_table "set_top_boxes", force: :cascade do |t|
     t.string "name", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_set_top_boxes_on_name", unique: true

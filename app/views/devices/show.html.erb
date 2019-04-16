@@ -1,30 +1,10 @@
   <p style="margin-top: 5%" class="show">
     <strong>Device name:</strong>
    <%= @device.name %>
-      <ul><li>Device packages: </li></ul>
-<% if @packages == nil %>
-  <span>Ops, no package yet, please contact admin.</span>
-<% else %>
-<div style="margin-bottom: 20px">
-  
-        <ul>
-          <ul>
-          <% @packages.each do |package| %>
-            <% if @devices.include?(package.id) %>
-              <li>
-              <%= package.name %> 
-             </li>
-            <% end %>
-          <% end %>
-          </ul>  
-        </ul>
-  
-  
-  
-</div> 
-<% end %>
-   
-   
+  </p>
+  <p>
+    <strong>Description:</strong>
+   <%= @device.description %>
   </p>
 
 <%= link_to 'Edit', edit_device_path(@device) %> |

@@ -2,7 +2,7 @@ class AntennasController < ApplicationController
   before_action :logged_in_user, :correct_user
 
   def show
-    @channels = Channel.order(:name).all
+    @channels = Channel.order(:name)
     @user = User.find(params[:id])
     @antennas = Array.new
     @user.antennas.each do |antenna|

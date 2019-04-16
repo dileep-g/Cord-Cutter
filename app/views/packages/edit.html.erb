@@ -3,42 +3,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@package) do |f| %>
-      <%= render 'shared/error_messages', obj: @package %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name, placeholder: 'Enter package name', autofocus: true, class: 'form-control'%>
-      <%= f.label :cost %>
-      <%= f.text_field :cost, placeholder: 'Enter package cost', autofocus: true, class: 'form-control'%>
-      
-      <!--Form for channels-->
-      <% if @channels == nil %>
-        <span>Ops, no channel yet, please contact admin.</span>
-        <br></br>
-      <% else %>
-      <div style="margin-bottom: 20px">
-
-        <ul>
-          <% @channels.each do |channel| %>  
-            <li>
-              <% if @packages.include?(channel.id) %>
-                <%= check_box_tag "items[]", channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% else %>
-                <%= check_box_tag "items[]", channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% end %>
-            <%= channel.name %> 
-            <%= link_to 'Detail', '#' %>
-           </li>
-          <% end %>  
-        </ul>
-
-      </div>
-      <% end %>
-      <!--Form for channels-->
-      
-      <%= f.submit "Update package information", class: "btn btn-primary" %>
-      
-    <% end %>
+    <%= render 'form' %>
     <br>
     <p><%= link_to 'Cancel and return to package information', @package %></p>
   </div>

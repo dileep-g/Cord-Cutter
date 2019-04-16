@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :calculator]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :calculator]
   before_action :admin_user, only: [:index]
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_channels, :set_devices, :set_boxes, only:[:show]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy, :calculator]
 
   # GET /users
   # GET /users.json
@@ -14,16 +13,22 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-    @user.antennas.each do |antenna|
-      @channels << Channel.find(antenna.channel_id)
-    end
-    @user.own_devices.each do |own_device|
-      @devices << Device.find(own_device.device_id)
-    end
-    @user.own_boxes.each do |own_box|
-      @set_top_boxes << SetTopBox.find(own_box.set_top_box_id)
-    end
+      @user = User.find(params[:id])
+      @channels = Array.new
+      @user.antennas.each do |antenna|
+        @channels << Channel.find(antenna.channel_id)
+     end
+      @channels.sort_by{|e| e[:name]}
+      @devices = Array.new
+      @user.own_devices.each do |own_device|
+        @devices << Device.find(own_device.device_id)
+      end
+      @devices.sort_by{|e| e[:name]}
+      @set_top_boxes = Array.new
+      @user.own_boxes.each do |own_box|
+        @set_top_boxes << SetTopBox.find(own_box.set_top_box_id)
+      end
+      @set_top_boxes.sort_by{|e| e[:name]}
   end
 
   # GET /users/new
@@ -83,22 +88,35 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
+  def calculator
+    @channels = Channel.order(:name)
+    @user = User.find(params[:id])
+    @must_have = Array.new
+    @would_have = Array.new
+    @ok_have = Array.new
+    @user.perferences.each do |perference|
+      if perference.rate == 3
+        @must_have << perference.channel.id
+      elsif perference.rate == 2
+        @would_have << perference.channel.id
+      elsif perference.rate == 1
+        @ok_have << perference.channel.id
+      end
+    end
+  end
+
+  def calculate
+    @channels = Channel.order(:name)
+    Perference.delete_record(params[:id])
+    Perference.create_record(params[:id], params[:must_have], params[:would_have], params[:ok_have])
+    @result = Perference.cut_cord(params[:must_have])
+    render 'calculator'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-    end
-
-    def set_channels
-      @channels = Array.new
-    end
-
-    def set_devices
-      @devices = Array.new
-    end
-
-    def set_boxes
-      @set_top_boxes = Array.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

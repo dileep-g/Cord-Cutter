@@ -3,37 +3,6 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@device) do |f| %>
-      <%= render 'shared/error_messages', obj: @device %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name, placeholder: 'Enter device name', autofocus: true, class: 'form-control'%>
-      
-      
-      <% if @packages == nil %>
-        <span>Ops, no package yet, please contact admin.</span>
-        <br></br>
-      <% else %>
-      <div style="margin-bottom: 20px">
-
-        <ul>
-          <% @packages.each do |package| %>  
-            <li>
-              <% if @devices.include?(package.id) %>
-                <%= check_box_tag "items[]", package.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% else %>
-                <%= check_box_tag "items[]", package.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% end %>
-            <%= package.name %> 
-            
-           </li>
-          <% end %>  
-        </ul>
-
-      </div>
-      <% end %>
-
-      <%= f.submit "Create new device", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>

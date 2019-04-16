@@ -1,28 +1,10 @@
   <p style="margin-top: 5%" class="show">
     <strong>Box name:</strong>
    <%= @set_top_box.name %>
-
-    <ul><li>Set top box packages: </li></ul>
-     <% if @packages == nil %>
-        <span>Ops, no channel yet, please contact admin.</span>
-        <br></br>
-      <% else %>
-      <div style="margin-bottom: 20px">
-
-        <ul>
-          <ul>
-          <% @packages.each do |package| %>
-            <% if @set_top_boxes.include?(package.id) %>
-              <li>
-              <%= package.name %> 
-             </li>
-            <% end %>
-          <% end %>
-          </ul>  
-        </ul>
-
-      </div>
-      <% end %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+   <%= @set_top_box.description %>
   </p>
 
 <%= link_to 'Edit', edit_set_top_box_path(@set_top_box) %> |

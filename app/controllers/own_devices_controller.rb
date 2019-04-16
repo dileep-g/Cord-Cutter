@@ -3,7 +3,7 @@ class OwnDevicesController < ApplicationController
 
 
   def show
-    @devices = Device.order(:name).all
+    @devices = Device.order(:name).paginate(page: params[:page], per_page: 10)
     @user = User.find(params[:id])
     @own_devices = Array.new
     @user.own_devices.each do |own_device|

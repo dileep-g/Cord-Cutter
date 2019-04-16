@@ -1,0 +1,22 @@
+<h1 class="title">Select origin package</h1>
+<div style="margin-bottom: 20px">
+</div>
+<table width=100%>
+  <thead>
+    <tr class="show-list">
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @packages.each do |package| %>
+      <tr class="show-list">
+        <td width=40%><%= package.name %></td>
+        <td width=20%><%= link_to 'Select', hierarchical_new_path(package.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= will_paginate %>

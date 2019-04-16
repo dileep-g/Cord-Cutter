@@ -2,7 +2,7 @@ class OwnBoxesController < ApplicationController
   before_action :logged_in_user, :correct_user
 
   def show
-    @set_top_boxes = SetTopBox.order(:name).all
+    @set_top_boxes = SetTopBox.order(:name).paginate(page: params[:page], per_page: 10)
     @user = User.find(params[:id])
     @own_boxes = Array.new
     @user.own_boxes.each do |own_box|

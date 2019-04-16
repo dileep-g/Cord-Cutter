@@ -11,54 +11,33 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
-    @packages = Package.order(:name).all
-    @devices = Array.new
-    @device.support_devices.each do |support_device|
-      @devices << support_device.package_id
-    end
   end
 
   # GET /devices/new
   def new
     @device = Device.new
-    @packages = Package.order(:name).all
-    @devices = Array.new
-    @device.support_devices.each do |support_device|
-      @devices << support_device.package_id
-    end
   end
 
   # GET /devices/1/edit
   def edit
-    @packages = Package.order(:name).all
-    @devices = Array.new
-    @device.support_devices.each do |support_device|
-      @devices << support_device.package_id
-    end
   end
 
   # POST /devices
   # POST /devices.json
   def create
-    @packages = Package.order(:name).all
     @device = Device.new(device_params)
 
       if @device.save
-        current_device = Device.find_by(name: @device.name)
-        SupportDevice.create_record(current_device.id, params[:items]) 
         flash[:success] = "Create success!"
         redirect_to @device
       else
         render 'new'
-       
       end
   end
 
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
   def update
-    SupportDevice.delete_record(params[:id])
-    SupportDevice.create_record(params[:id], params[:items])
       if @device.update(device_params)
         flash[:success] = "Update success!"
         redirect_to @device

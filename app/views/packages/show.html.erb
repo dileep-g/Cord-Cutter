@@ -1,27 +1,48 @@
   <p style="margin-top: 5%" class="show">
     <strong>Package name:</strong>
-   <%= @package.name %>
+    <%= @package.name %>
+    <br>
+    <% if @package.DVR %>
+      <p>Support DVR service</p>
+    <% else %>
+      <p>Does not support DVR service</p>
+    <% end %>
     <ul><li>Package cost: $<%= @package.cost %></li></ul>
-    <ul><li>Package channels: </li></ul>
-     <% if @channels == nil %>
-        <span>Ops, no channel yet, please contact admin.</span>
-        <br></br>
-      <% else %>
-      <div style="margin-bottom: 20px">
-
+    <ul><li>Include channels: </li></ul>
+     <% if @package_channels != nil %>
         <ul>
           <ul>
-          <% @channels.each do |channel| %>
-            <% if @packages.include?(channel.id) %>
+          <% @package_channels.each do |channel| %>
               <li>
               <%= channel.name %> 
              </li>
-            <% end %>
           <% end %>
           </ul>  
         </ul>
-
-      </div>
+      <% end %>
+    <ul><li>Available devices: </li></ul>
+     <% if @package_devices != nil %>
+        <ul>
+          <ul>
+          <% @package_devices.each do |device| %>
+              <li>
+              <%= device.name %> 
+             </li>
+          <% end %>
+          </ul>  
+        </ul>
+      <% end %>
+    <ul><li>Available set top boxes: </li></ul>
+     <% if @package_boxes != nil %>
+        <ul>
+          <ul>
+          <% @package_boxes.each do |box| %>
+              <li>
+              <%= box.name %> 
+             </li>
+          <% end %>
+          </ul>  
+        </ul>
       <% end %>
   </p>
 

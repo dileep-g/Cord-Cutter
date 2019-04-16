@@ -1,22 +1,11 @@
-<%= form_with(model: device, local: true) do |form| %>
-  <% if device.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(device.errors.count, "error") %> prohibited this device from being saved:</h2>
+    <%= form_for(@device) do |f| %>
+      <%= render 'shared/error_messages', obj: @device %>
 
-      <ul>
-      <% device.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: 'Enter device name', autofocus: true, class: 'form-control'%>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :device_name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+      <%= f.label :description %>
+      <%= f.text_field :description, placeholder: 'Enter description', class: 'form-control'%>
+      
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
