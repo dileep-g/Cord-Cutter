@@ -61,7 +61,7 @@ class SetTopBoxesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def set_top_box_params
-      params.require(:set_top_box).permit(:name)
+      params.require(:set_top_box).permit(:name, :description)
     end
 
     def admin_user

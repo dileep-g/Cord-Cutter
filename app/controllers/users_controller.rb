@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :calculator]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :calculator, :calculate]
   before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :calculator]
   before_action :admin_user, only: [:index]
   before_action :correct_user, only: [:show, :edit, :update, :destroy, :calculator]
@@ -103,13 +103,22 @@ class UsersController < ApplicationController
         @ok_have << perference.channel.id
       end
     end
+    @budget = 0.0
+    @flag_dvr = false
   end
 
   def calculate
     @channels = Channel.order(:name)
     Perference.delete_record(params[:id])
     Perference.create_record(params[:id], params[:must_have], params[:would_have], params[:ok_have])
-    @result = Perference.cut_cord(params[:must_have])
+    must_have = Antenna.remove_channel(params[:id], params[:must_have])
+    would_have = Antenna.remove_channel(params[:id], params[:would_have])
+    ok_have = Antenna.remove_channel(params[:id], params[:ok_have])
+    results = Perference.cut_cord(must_have)
+    if params[:budget].to_f <= 0
+      params[:budget] = 9999
+    end
+    @results_overall = Perference.recommend_overall(results, params[:id], params[:budget], would_have, ok_have, params[:flag_dvr])
     render 'calculator'
   end
 
@@ -121,7 +130,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :remember_digest, :first_name, :last_name, :admin)
+      params.require(:user).permit(:email, :password, :password_confirmation, :remember_digest, :first_name, :last_name, :admin, :budget, :flag_dvr)
     end
 
     def logged_in_user

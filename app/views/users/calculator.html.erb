@@ -3,7 +3,7 @@
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
 <div style="margin-bottom: 20px">
-  <%= form_for(calculate_path) do %>
+  <%= form_for(calculate_path) do |f| %>
     <div style="margin-bottom: 20px">
       <h4>Must have channels</h4>
         <% @channels.each do |channel| %>  
@@ -50,8 +50,34 @@
         <% end %>  
     </div>
     <h4>Budget</h4>
-    <%= text_field 'budget', placeholder: 'Enter package name', class: 'form-control'%>
-  <%= button_to "Calculate", class: "btn btn-primary"  %>
+    <%= text_field_tag :budget, "Enter the budget",type: "number", class: 'form-control'%>
+    <h4>DVR</h4>
+    <%= check_box_tag :flag_dvr, checked_value: true, class: "checkbox inline"%>
+  <%= f.submit "Calculate", class: "btn btn-primary"  %>
+  <% end %>
+</div>
+<div>
+  <% if @results_overall != nil %>
+    <% @results_overall.each do |result| %>
+      <h4>Package set</h4>
+    <%= "Packages:" %><br>
+      <% result[:package].each do |package| %>
+        <%= package %><br>
+      <% end %>
+      <%= "Cost: #{result[:expense].round(2)}" %><br>
+      <% if result[:devices] == 0 %>
+        <%= "Some packages may not support your devices" %>
+        <br>
+      <% end %>
+      <% if result[:boxes] == 0 %>
+        <%= "Some packages may not support your set top box" %>
+        <br>
+      <% end %>
+      <% if result[:dvr] == 0 %>
+        <%= "Packages does not satisfy your DVR perference" %>
+        <br>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 <% end %>
