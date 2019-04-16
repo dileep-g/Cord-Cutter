@@ -17,11 +17,41 @@
   <%= @user.last_name %>
 </p>
 
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 </div>
 -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
 
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+
+<body>
 <div class="profile">
   <% provide(:title, "Dear #{@user.first_name}") %>
   <h1>
@@ -38,25 +68,47 @@
   <%= link_to 'Edit your profile', edit_user_path(@user) %> | 
   <%= link_to 'Change your password', '#' %>
   </div>
-  <p class="show">
-    <strong>Antenna:</strong><br>
-    <%= render 'form_antenna' %>
-  </p>
-  <div class="users">
-  <%= link_to 'Edit antenna channel', antenna_path(@user.id) %> 
+  
+  <br></br>
+  
+  <button class="collapsible"><strong>Antenna:</strong><br></button>
+  <div class="content">
+    <p><%= render 'form_antenna' %></p>
+    <%= link_to 'Edit antenna channel', antenna_path(@user.id) %> 
+    <br></br>
   </div>
-  <p class="show">
-    <strong>Device:</strong><br>
-    <%= render 'form_device' %>
-  </p>
-  <div class="users">
-  <%= link_to 'Edit your devices', own_device_path(@user.id) %> 
+  
+  <button class="collapsible"><strong>Device:</strong><br></button>
+  <div class="content">
+    <p><%= render 'form_device' %></p>
+    <%= link_to 'Edit your devices', own_device_path(@user.id) %>
+    <br></br>
   </div>
-  <p class="show">
-    <strong>Set top box:</strong><br>
-   <%= render 'form_box' %>
-  </p>
-  <div class="users">
-  <%= link_to 'Edit your set top boxes', own_box_path(@user.id) %> 
+  
+  <button class="collapsible"><strong>Set top box:</strong><br></button>
+  <div class="content">
+    <p><%= render 'form_box' %></p>
+    <%= link_to 'Edit your set top boxes', own_box_path(@user.id) %> 
+    <br></br>
   </div>
 </div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
+
+</html>
