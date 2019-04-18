@@ -52,7 +52,9 @@
     <h4>Budget</h4>
     <%= text_field_tag :budget, "Enter the budget",type: "number", class: 'form-control'%>
     <h4>DVR</h4>
-    <%= check_box_tag :flag_dvr, checked_value: true, class: "checkbox inline"%>
+    <%= check_box_tag :flag_dvr, 'true', checked = false, class: "checkbox inline"%>
+    <h4>Only need one package?</h4>
+    <%= check_box_tag :flag_one_pack, 'true', checked = false,class: "checkbox inline"%>
   <%= f.submit "Calculate", class: "btn btn-primary"  %>
   <% end %>
 </div>
@@ -60,11 +62,27 @@
   <% if @results_overall != nil %>
     <% @results_overall.each do |result| %>
       <h4>Package set</h4>
-    <%= "Packages:" %><br>
+      <p>
+      <%= "Packages:" %><br>
       <% result[:package].each do |package| %>
-        <%= package %><br>
+        <%= "#{package}," %>
       <% end %>
-      <%= "Cost: #{result[:expense].round(2)}" %><br>
+      </p>
+      <p>
+      <% result[:must_have].each do |channel| %>
+        <%= "#{channel}," %>
+      <% end %>
+      <% result[:would_have].each do |channel| %>
+        <%= "#{channel}," %>
+      <% end %>
+      <% result[:ok_have].each do |channel| %>
+        <%= "#{channel}," %>
+      <% end %>
+      </p>
+      <p>
+      <%= "Cost: #{result[:expense].round(2)}" %>
+      </p>
+      <p>
       <% if result[:devices] == 0 %>
         <%= "Some packages may not support your devices" %>
         <br>
@@ -77,6 +95,7 @@
         <%= "Packages does not satisfy your DVR perference" %>
         <br>
       <% end %>
+      </p>
     <% end %>
   <% end %>
 </div>

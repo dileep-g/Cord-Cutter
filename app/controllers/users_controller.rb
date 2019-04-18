@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :calculator, :calculate]
-  before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :calculator]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :calculator, :calculate, :change_password, :update_password]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :calculator, :change_password, :update_password]
   before_action :admin_user, only: [:index]
-  before_action :correct_user, only: [:show, :edit, :update, :destroy, :calculator]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy, :calculator, :change_password, :update_password]
 
   # GET /users
   # GET /users.json
@@ -84,10 +84,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def password
-    @user = User.find(session[:user_id])
-  end
-
   def calculator
     @channels = Channel.order(:name)
     @user = User.find(params[:id])
@@ -114,11 +110,17 @@ class UsersController < ApplicationController
     must_have = Antenna.remove_channel(params[:id], params[:must_have])
     would_have = Antenna.remove_channel(params[:id], params[:would_have])
     ok_have = Antenna.remove_channel(params[:id], params[:ok_have])
-    results = Perference.cut_cord(must_have)
+    must_have, would_have, ok_have = Perference.remove_redudant(must_have, would_have, ok_have)
+    if params[:flag_one_pack] == 'true'
+      results = Perference.one_package(must_have)
+    else
+      results = Perference.cut_cord(must_have)
+    end
     if params[:budget].to_f <= 0
       params[:budget] = 9999
     end
-    @results_overall = Perference.recommend_overall(results, params[:id], params[:budget], would_have, ok_have, params[:flag_dvr])
+    @results_overall = Perference.recommend_overall(results, params[:id], params[:budget], must_have, would_have, ok_have, params[:flag_dvr], params[:flag_one_pack])
+    
     render 'calculator'
   end
 

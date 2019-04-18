@@ -29,6 +29,20 @@ class Perference < ApplicationRecord
     end
   end
 
+  def Perference.remove_redudant(must_have, would_have, ok_have)
+    if !(must_have & would_have).empty?
+      would_have = would_have - (must_have & would_have)
+    end
+    if !(must_have & ok_have).empty?
+      ok_have = ok_have - (must_have & ok_have)
+    end
+    if !(ok_have & would_have).empty?
+      ok_have = ok_have - (ok_have & would_have)
+    end
+    return must_have, would_have, ok_have
+  end
+
+  # find all package combinations that satisfy the must have channels
   def Perference.cut_cord(must_have)
     # array store the package combinations
     results = []
@@ -72,6 +86,7 @@ class Perference < ApplicationRecord
           packages.each do |package|
             result_new = Array.new(result)
             result_new << package
+            result_new.sort!
             results_new << result_new
           end
           results_delete << result # delete current result
@@ -81,10 +96,32 @@ class Perference < ApplicationRecord
       results = results - results_delete
       results = results + results_new
     end
+    return results.uniq
+  end
+
+  # find one package
+  def Perference.one_package(must_have)
+    # array store the package combinations
+    results = []
+    packages_hash = Hash.new # store current channels' package hash
+    packages_hash.default = 0
+
+    must_have.each do |channel| # for each must have channel
+      # find corresponding channels
+      ProvideChannel.where(channel_id: channel).each do |provide|
+        packages_hash[provide.package_id] += 1
+      end # end package_id for
+    end
+    packages_hash.each_key do |package|
+      result = [package]
+      results << result
+    end
     return results
   end
 
-  def Perference.recommend_overall(results, user_id, budget, would_have, ok_have, dvr)
+  # recommend according to the user profile and preference
+  def Perference.recommend_overall(results, user_id, budget, must_have, would_have, ok_have, dvr, flag_one_pack)
+    # store user profile and result
     results_overall = []
     devices = []
     boxes = []
@@ -94,14 +131,20 @@ class Perference < ApplicationRecord
     OwnBox.where(user_id: user_id).each do |own_box|
       boxes << own_box.set_top_box_id
     end
+
+    # for every result
     results.each do |result|
+      # use a hash to store the information needed to show
       result_hash = Hash.new
+
+      # find name of packages
       names = []
       result.each do |package|
         names << Package.find(package).name
       end
       result_hash[:package] = names
 
+      # find all information of packages
       result_devices = []
       result_boxes = []
       result_channels = []
@@ -124,9 +167,12 @@ class Perference < ApplicationRecord
         end
       end
       
+      # discard over-budget results
       if expense > budget.to_f
         next
       end
+
+      # figure out whether the result support user's demands
       result_devices.uniq!
       result_boxes.uniq!
       if (devices - result_devices).empty?
@@ -140,28 +186,46 @@ class Perference < ApplicationRecord
         result_hash[:boxes] = 0
       end
       result_hash[:expense] = expense
-      if dvr == true && flag_dvr == false
+      if dvr == 'true' && flag_dvr == false
         result_hash[:dvr] = 0
       else
         result_hash[:dvr] = 1
       end
 
+      count_must_have = 0
+      result_hash[:must_have] = []
       count_would_have = 0
+      result_hash[:would_have] = []
       count_ok_have = 0
+      result_hash[:ok_have] = []
+      must_have.each do |channel|
+        if result_channels.include?(channel.to_i)
+          count_must_have += 1
+          result_hash[:must_have] << Channel.find(channel).name
+        end
+      end
       would_have.each do |channel|
-        if result_channels.include?(channel)
-          count_would_have = count_would_have + 1
+        if result_channels.include?(channel.to_i)
+          count_would_have += 1
+          result_hash[:would_have] << Channel.find(channel).name
         end
       end
       ok_have.each do |channel|
-        if result_channels.include?(channel)
-          count_ok_have = count_ok_have + 1
-          endcount_would_h
+        if result_channels.include?(channel.to_i)
+          count_ok_have += 1
+          result_hash[:ok_have] << Channel.find(channel).name
         end
       end
-      result_hash[:score] = count_would_have * 10 + count_ok_have * 5 + 1000 / expense + result_hash[:devices] * 5 + result_hash[:boxes] * 5 + result_hash[:dvr] * 5
+      result_hash[:score] = count_must_have * 50 + 
+        count_would_have * 10 + 
+        count_ok_have * 5 + 
+        1000 / expense + 
+        result_hash[:devices] * 5 + 
+        result_hash[:boxes] * 5 + 
+        result_hash[:dvr] * 5
       results_overall << result_hash
     end
+    # sort by score
     results_overall.sort_by! {|hash| -hash[:score]}
     return results_overall
   end
