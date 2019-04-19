@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+
 <h1 class="title">Antenna channel list</h1>
 <% if @channels == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
@@ -25,3 +29,34 @@
 </div>
 <% end %>
 
+<body>
+<h1 class="title">Antenna channel list</h1>
+<% if @channels == nil %>
+  <span>Ops, no channel yet, please contact admin.</span>
+<% else %>
+<!--<div style="margin-bottom: 20px">-->
+  <%= form_for(update_antenna_path) do %>
+  <ul>
+<div class="wrapper">
+    <div class="btn-group">
+      <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channel <span class="caret"></span></button>
+        <ul class="dropdown-menu" role="listbox">
+    <% @channels.each do |channel| %>  
+        <% if @antennas.include?(channel.id) %>
+          <li><input type="text" id="channel"><label for="channel"><%= check_box_tag "items[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+        <% else %>
+          <li><input type="text" id="channel"><label for="channel"><%= check_box_tag "items[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+        <% end %>
+    <% end %> 
+        </ul>
+    </div>
+</div>
+  </ul>
+  <%= button_to "Submit", class: "btn btn-primary"  %>
+  <% end %>
+  <%= link_to 'Cancel and to back to profile', @user %>
+<!--</div>-->
+<% end %>
+</body>
+
+</html>
