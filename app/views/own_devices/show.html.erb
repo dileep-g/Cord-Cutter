@@ -1,25 +1,42 @@
+<html>
+<head>
+  
+<style>
+
+</style>
+
+</head>
+
+<body>
 <h1 class="title">Device list</h1>
 <% if @devices == nil %>
-  <span>Ops, no device yet, please contact admin.</span>
+  <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-<div style="margin-bottom: 20px">
+<!--<div style="margin-bottom: 20px">-->
   <%= form_for(update_own_device_path) do %>
   <ul>
-    <% @devices.each do |device| %>  
-    <li>
-      <% if @own_devices.include?(device.id) %>
-        <%= check_box_tag "items[]", device.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>  
-      <% else %>
-        <%= check_box_tag "items[]", device.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>  
-      <% end %>
-      <%= device.name %> 
-      <!--<%= link_to 'Detail', '#' %>-->
-    </li>
-    <% end %>  
+  <div class="wrapper">
+      <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Device <span class="caret"></span></button>
+          <ul style= "width: 450px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+            <% @devices.each do |device| %>  
+                <% if @own_devices.include?(device.id) %>
+                  <li><input type="text" id="device"><label for="device"><%= check_box_tag "items[]", device.id, true, style: "width: 50px; float: left"%><%= device.name %></label></li>
+                <% else %>
+                  <li><input type="text" id="device"><label for="device"><%= check_box_tag "items[]", device.id, false, style: "width: 50px; float: left"%><%= device.name %></label></li>
+                <% end %>
+            <% end %> 
+          </ul>
+      </div>
+  </div>
   </ul>
-  <%= button_to "Submit", class: "btn btn-primary"  %>
+  <%= button_to "Submit",  class: "btn btn-primary" %>
   <% end %>
   <%= link_to 'Cancel and to back to profile', @user %>
-</div>
+<!--</div>-->
 <% end %>
+
+</body>
+
+</html>
 

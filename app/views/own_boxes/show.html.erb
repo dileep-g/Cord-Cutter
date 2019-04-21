@@ -1,25 +1,45 @@
+
+<html>
+<head>
+  
+<style>
+
+</style>
+
+</head>
+
+<body>
 <h1 class="title">Set top box list</h1>
 <% if @set_top_boxes == nil %>
-  <span>Ops, no set top box yet, please contact admin.</span>
+  <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-<div style="margin-bottom: 20px">
+<!--<div style="margin-bottom: 20px">-->
   <%= form_for(update_own_box_path) do %>
-    <ul>
-      <% @set_top_boxes.each do |box| %>  
-      <li>
-        <% if @own_boxes.include?(box.id) %>
-          <%= check_box_tag "items[]", box.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>  
-        <% else %>
-          <%= check_box_tag "items[]", box.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>  
-        <%end%>
-         <%= box.name %> 
-         <!--<%= link_to 'Detail', '#' %>-->
-      </li>
-      <% end %>  
-    </ul>
-    <%= button_to "Submit", class: "btn btn-primary"  %>
+  <ul>
+  <div class="wrapper">
+      <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Box <span class="caret"></span></button>
+          <ul style= "width: 450px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+            <% @set_top_boxes.each do |box| %>  
+                <% if @own_boxes.include?(box.id) %>
+                  <li><input type="text" id="box"><label for="box"><%= check_box_tag "items[]", box.id, true, style: "width: 50px; float: left"%><%= box.name %></label></li>
+                <% else %>
+                  <li><input type="text" id="box"><label for="box"><%= check_box_tag "items[]", box.id, false, style: "width: 50px; float: left"%><%= box.name %></label></li>
+                <% end %>
+            <% end %> 
+          </ul>
+      </div>
+  </div>
+  </ul>
+  <%= button_to "Submit",  class: "btn btn-primary" %>
   <% end %>
   <%= link_to 'Cancel and to back to profile', @user %>
-</div>
+<!--</div>-->
 <% end %>
+
+</body>
+
+</html>
+
+
 
