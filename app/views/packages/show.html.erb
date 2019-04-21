@@ -9,39 +9,27 @@
     <% end %>
     <ul><li>Package cost: $<%= @package.cost %></li></ul>
     <ul><li>Include channels: </li></ul>
-     <% if @package_channels != nil %>
+      <% if @package_channels != nil %>
         <ul>
-          <ul>
           <% @package_channels.each do |channel| %>
-              <li>
-              <%= channel.name %> 
-             </li>
+            &diams; <%= channel.name %> &nbsp;
           <% end %>
-          </ul>  
         </ul>
       <% end %>
     <ul><li>Available devices: </li></ul>
      <% if @package_devices != nil %>
         <ul>
-          <ul>
           <% @package_devices.each do |device| %>
-              <li>
-              <%= device.name %> 
-             </li>
+            &diams;  <%= device.name %> &nbsp;
           <% end %>
-          </ul>  
         </ul>
       <% end %>
     <ul><li>Available set top boxes: </li></ul>
      <% if @package_boxes != nil %>
         <ul>
-          <ul>
           <% @package_boxes.each do |box| %>
-              <li>
-              <%= box.name %> 
-             </li>
+           &diams;  <%= box.name %> &nbsp;
           <% end %>
-          </ul>  
         </ul>
       <% end %>
   </p>
