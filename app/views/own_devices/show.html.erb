@@ -18,7 +18,7 @@
   <div class="wrapper">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Device <span class="caret"></span></button>
-          <ul style= "width: 450px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+          <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @devices.each do |device| %>  
                 <% if @own_devices.include?(device.id) %>
                   <li><input type="text" id="device"><label for="device"><%= check_box_tag "items[]", device.id, true, style: "width: 50px; float: left"%><%= device.name %></label></li>

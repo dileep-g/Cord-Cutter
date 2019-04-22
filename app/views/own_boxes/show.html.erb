@@ -19,7 +19,7 @@
   <div class="wrapper">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Box <span class="caret"></span></button>
-          <ul style= "width: 450px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+          <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @set_top_boxes.each do |box| %>  
                 <% if @own_boxes.include?(box.id) %>
                   <li><input type="text" id="box"><label for="box"><%= check_box_tag "items[]", box.id, true, style: "width: 50px; float: left"%><%= box.name %></label></li>

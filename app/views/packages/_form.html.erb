@@ -17,79 +17,83 @@
         <span>Ops, no channel yet, please contact admin.</span>
         <br></br>
       <% else %>
-      <div style="margin-bottom: 20px">
+      <!--<div style="margin-bottom: 20px">-->
           <h4>Channels</h4>
-          <% @channels.each do |channel| %>  
-            <p>
-            <td>
-              <% if @package_channels != nil && @package_channels.include?(channel) %>
-                <%= check_box_tag "channels[]", channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% else %>
-                <%= check_box_tag "channels[]", channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% end %>
-            <%= channel.name %> 
-            
-            </td>
-            </p>
-
-          <% end %>  
-
-      </div>
+            <ul>
+              <div class="wrapper">
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
+                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <% @channels.each do |channel| %>  
+                        <% if @package_channels != nil && @package_channels.include?(channel) %>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+                        <% else %>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+                        <% end %>
+                      <% end %>  
+                    </ul>
+                </div>
+              </div>
+            </ul>
+      <!--</div>-->
       <% end %>
       <!--Form for channels-->
       
-      <!--Form for channels-->
+      
+      <!--Form for devices-->
       <% if @devices == nil %>
         <span>Ops, no device yet, please contact admin.</span>
         <br></br>
       <% else %>
       <div style="margin-bottom: 20px">
           <h4>Devices</h4>
-          <% @devices.each do |device| %>  
-            <p>
-            <td>
-              <% if @package_devices != nil && @package_devices.include?(device) %>
-                <%= check_box_tag "devices[]", device.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% else %>
-                <%= check_box_tag "devices[]", device.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% end %>
-            <%= device.name %> 
-            
-            </td>
-            </p>
-
-          <% end %>  
-
-
-      </div>
+            <ul>
+              <div class="wrapper">
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
+                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <% @devices.each do |device| %>  
+                        <% if @package_devices != nil && @package_devices.include?(device) %>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "devices[]", device.id, true, style: "width: 50px; float: left"%><%= device.name %></label></li>
+                        <% else %>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "devices[]", device.id, false, style: "width: 50px; float: left"%><%= device.name %></label></li>
+                        <% end %>
+                      <% end %>  
+                    </ul>
+                </div>
+              </div>
+            </ul>
+      <!--</div>-->
       <% end %>
-      <!--Form for channels-->
+      <!--Form for devices-->
 
-      <!--Form for channels-->
+      <!--Form for set top boxes-->
       <% if @boxes == nil %>
         <span>Ops, no set top box yet, please contact admin.</span>
         <br></br>
       <% else %>
       <div style="margin-bottom: 20px">
           <h4>Set top boxes</h4>
-          <% @boxes.each do |box| %>  
-            <p>
-            <td>
-              <% if @package_boxes != nil && @package_boxes.include?(box) %>
-                <%= check_box_tag "set_top_boxes[]", box.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% else %>
-                <%= check_box_tag "set_top_boxes[]", box.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
-              <% end %>
-            <%= box.name %> 
-            
-            </td>
-            </p>
-
-          <% end %>  
-
-      </div>
+            <ul>
+              <div class="wrapper">
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
+                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <% @boxes.each do |box| %>  
+                        <% if @package_boxes != nil && @package_boxes.include?(device) %>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "set_top_boxes[]", box.id, true, style: "width: 50px; float: left"%><%= box.name %></label></li>
+                        <% else %>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "set_top_boxes[]", box.id, false, style: "width: 50px; float: left"%><%= box.name %></label></li>
+                        <% end %>
+                      <% end %>  
+                    </ul>
+                </div>
+              </div>
+            </ul>
+      <!--</div>-->
       <% end %>
-      <!--Form for channels-->
+      <!--Form for set top boxes-->
+      
       <%= f.submit "Submit", class: "btn btn-primary" %>
       
     <% end %>
