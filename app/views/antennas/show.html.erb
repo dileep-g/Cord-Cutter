@@ -18,7 +18,7 @@
   <div class="wrapper">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channel <span class="caret"></span></button>
-          <ul style= "width: 450px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+          <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @channels.each do |channel| %>  
                 <% if @antennas.include?(channel.id) %>
                   <li><input type="text" id="channel"><label for="channel"><%= check_box_tag "items[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
