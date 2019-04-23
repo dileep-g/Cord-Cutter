@@ -6,22 +6,18 @@
   <%= form_for(calculate_path) do |f| %>
     <div style="margin-bottom: 20px">
       <h4>Must have channels</h4>
-            <ul>
-              <div class="wrapper">
-                <div class="btn-group">
-                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <% @channels.each do |channel| %>  
-                        <% if @package_channels != nil && @package_channels.include?(channel) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% end %>
-                      <% end %>  
-                    </ul>
-                </div>
-              </div>
-            </ul>  
+        <% @channels.each do |channel| %>  
+          <p>
+          <td>
+            <% if @must_have != nil && @must_have.include?(channel.id) %> 
+              <%= check_box_tag 'must_have[]', channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% else %>
+              <%= check_box_tag 'must_have[]', channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%>
+            <% end %>
+              <%= channel.name %> 
+            </td>
+          </p>
+        <% end %>  
     </div>
     <div style="margin-bottom: 20px">
       <h4>Would like to have channels</h4>
