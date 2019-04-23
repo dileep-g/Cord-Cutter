@@ -50,21 +50,21 @@
   <button class="collapsible"><strong>Antenna:</strong><br></button>
   <div class="content">
     <p><%= render 'form_antenna' %></p>
-    <%= link_to 'Edit antenna channel', antenna_path(@user.id) %> 
+    <%= link_to 'Edit Antenna Channel', antenna_path(@user.id) %> 
     <br></br>
   </div>
   
   <button class="collapsible"><strong>Device:</strong><br></button>
   <div class="content">
     <p><%= render 'form_device' %></p>
-    <%= link_to 'Edit your devices', own_device_path(@user.id) %>
+    <%= link_to 'Edit your Devices', own_device_path(@user.id) %>
     <br></br>
   </div>
   
   <button class="collapsible"><strong>Set top box:</strong><br></button>
   <div class="content">
     <p><%= render 'form_box' %></p>
-    <%= link_to 'Edit your set top boxes', own_box_path(@user.id) %> 
+    <%= link_to 'Edit your Set Top Boxes', own_box_path(@user.id) %> 
     <br></br>
   </div>
 </div>
