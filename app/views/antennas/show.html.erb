@@ -9,11 +9,11 @@
 
 <body>
 <div>
-<!--<h1 class="title">Antenna channel list</h1>-->
+<h1 class="title">Antenna channel list</h1>
 <% if @channels == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-<!--<div style="margin-bottom: 20px">-->
+<div style="margin-bottom: 20px">
   <%= form_for(update_antenna_path) do |f| %>
   <ul>
   <div class="wrapper">
@@ -33,7 +33,7 @@
   </ul>
   <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
-<!--</div>-->
+</div>
 <% end %>
 </div>
 </body>
