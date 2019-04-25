@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20190404211338) do
     t.index ["name"], name: "index_packages_on_name", unique: true
   end
 
+<<<<<<< HEAD
   create_table "perferences", force: :cascade do |t|
     t.integer "user_id"
     t.integer "channel_id"
@@ -122,4 +123,20 @@ ActiveRecord::Schema.define(version: 20190404211338) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+=======
+  create_table "users", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "password_digest"
+    t.boolean "admin", default: false
+  end
+
+>>>>>>> origin
 end

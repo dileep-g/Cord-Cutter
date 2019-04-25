@@ -47,10 +47,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+<<<<<<< HEAD
       log_in @user
       @user.update_attributes(admin: true) if params[:user][:admin] == '1'
       flash[:success] = "Sign up success!"
       redirect_to @user
+=======
+      session[:user_id] = @user.id
+      flash[:success] = "Just begin to cut your cord, #{@user.username}!"
+      redirect_to user_path(session[:user_id])
+>>>>>>> origin
     else
       render 'new'
     end

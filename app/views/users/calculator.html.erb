@@ -59,12 +59,16 @@
             </div>
           </ul>
     <!--Form for would have channels-->
-    <h4>Budget</h4>
-    <%= text_field_tag :budget, "Enter the budget",type: "number", class: 'form-control'%>
-    <h4>DVR</h4>
-    <%= check_box_tag :flag_dvr, 'true', checked = false,class: "checkbox inline"%>
-    <h4>Only need one package?</h4>
-    <%= check_box_tag :flag_one_pack, 'true', checked = false,class: "checkbox inline"%>
+    <%= f.label :Budget %>
+      <%= f.text_field :Budget , placeholder: 'Enter your budget', class: 'form-control'%>
+    <%= f.label :dvr, class: "checkbox inline" do %>
+      <%= f.check_box :dvr, class: "box"%>
+      <h4>DVR</h4>
+    <% end %>
+    <%= f.label :onepack, class: "checkbox inline" do %>
+      <%= f.check_box :flag_one_pack ,class: "box"%>
+      <h4>Only need one package?</h4>
+    <% end %>
   <%= f.submit "Calculate", class: "btn btn-primary"  %>
   <% end %>
 </div>

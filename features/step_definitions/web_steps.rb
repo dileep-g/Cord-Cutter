@@ -66,7 +66,7 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
 end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
-  check(field)
+  first(:field,field).click
 end
 
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|

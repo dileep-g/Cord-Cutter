@@ -7,10 +7,10 @@
       <%= f.text_field :cost, placeholder: 'Enter package cost', class: 'form-control'%>
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
-      <p>
-        DVR
-        <%= f.check_box :DVR, checked_value: true, unchecked_vale: false, style: "width: 50px; float: left", class: "checkbox inline"%>
-      </p>
+      <%= f.label :DVR, class: "checkbox inline" do %>
+        <%= f.check_box :DVR,  class: "checkbox inline"%>
+        <h5>DVR</h5>
+      <% end %>
 
       <!--Form for channels-->
       <% if @channels == nil %>
