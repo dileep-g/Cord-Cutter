@@ -56,7 +56,7 @@ class PackagesController < ApplicationController
       SupportDevice.create_record(params[:id], params[:devices])
     end
     if params[:channels] != nil
-      ProvideChannel.create_record(params[:id], params[:channels])  
+      # ProvideChannel.create_record(params[:id], params[:channels])  
     end
     if params[:set_top_boxes] != nil
       SupportBox.create_record(params[:id], params[:set_top_boxes])

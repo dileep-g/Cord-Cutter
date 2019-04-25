@@ -23,6 +23,18 @@ Given(/^the following channels exist:$/) do |channels_table|
   end
 end
 
+Given(/^the following devices exist:$/) do |devices_table|
+  devices_table.hashes.each do |device_hash|
+    Device.create device_hash
+  end
+end 
+
+Given(/^the following settopboxes exist:$/) do |settopboxes_table|
+  settopboxes_table.hashes.each do |settopbox_hash|
+    SetTopBox.create settopbox_hash
+  end
+end 
+
 Then("the cost of {string} should be {int}") do |package_name, cost|
   package = StreamPackage.find_by(name: package_name)
   expect(cost).to eq(package.cost)

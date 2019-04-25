@@ -31,9 +31,17 @@ Background: Admin is logged in
   Given the following packages exist:
   | name        | cost |
   | Sun Network |  50  |
-
+  
+  Given the following devices exist:
+  | name        | 
+  | Mobile     |
+  
+  Given the following settopboxes exist:
+  | name        | 
+  | Apple       |
+  
   Scenario: Show and Edit and Destroy
-    When I follow "Package list" 
+    When I follow "Package list"
     Then I should be on the packages page
     And I follow "Show"
     Then I am on the package page
@@ -41,21 +49,34 @@ Background: Admin is logged in
     Then I should be on the packages page
     And I follow "Edit"
     Then I am on the edit package page
-    And I press "Update package information"
+    And I press "Submit"
     Then I should be on the package page
     And I follow "Back"
     Then I should be on the packages page
     
-  Scenario: Add Package
+  Scenario: Add Package and Add New Hierarchical Package
     Given I am on the packages page
     When I follow "New Package"
     Then I should be on the new package page
     And I fill in "Name" with "ABC"
-    #And I fill in "Cost" with "10"
-    #And I go with "Sun TV, KTV" from Channels
-    And I press "Create new package"
+    And I fill in "Cost" with "10"
+    And I fill in "Link" with "Youtube"
+    Then I check "DVR"
+    Then I check "KTV"
+    Then I check "Mobile"
+    Then I check "Apple"
+    And I press "Submit"
     Then I should see "Create success!"
+    Then I should see "10"
+    Then I should see "Add New Hierarchical Package "
     And I am on the package page
+    Given I am on the packages page
+    When I follow "New Hierarchical Package"
+    Then I follow "Select"
+    Then I check "Sun TV"
+    Then I press "Submit"
+    Then I should see "Create success!"
+    
 
   # Scenario: Add Stream Package
   #   When I follow "Add Stream Package"

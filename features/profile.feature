@@ -44,52 +44,46 @@ Background: Add package information
     Then I follow "New Package"
     Then I fill in "Name" with "AmazonPrime"
     Then I fill in "Cost" with "50"
-<<<<<<< HEAD
     Then I check "DVR"
-=======
->>>>>>> refs/remotes/origin/remake
     Then I check "CBS"
     Then I check "BET"
     Then I check "BTN"
     Then I press "Submit"
     Then I should see "Create success!"
-<<<<<<< HEAD
     
-  # Scenario: Show and Edit and Destroy
-  #   When I follow "User management" 
-  #   Then I should be on the users page
-  #   And I follow "Show"
-  #   Then I am on the users1 page
-  #   And I follow "Edit your profile"
-  #   Then I fill in "First name" with "Ruijing"
-  #   Then I fill in "Last name" with "Bao"
-  #   Then I press "Update profile"
-  #   Then I should be on the users1 page
-  #   And I follow "Edit your profile"
-  #   Then I follow "Cancel and return to profile page"
-  #   Then I should be on the users1 page
-  #   And I follow "Edit Antenna Channel"
-  #   Then I am on the antenna page
-  #   Then I check "BET"
-  #   Then I press "Submit"
-  #   And I should be on the users1 page
-  #   And I follow "Edit Antenna Channel"
-  #   Then I follow "Cancel and to back to profile"
-  #   Then I should be on the users1 page
-  #   And I follow "Edit your Devices"
-  #   Then I should be on the devices1 page
-  #   # Then I should see "Apple"
-  #   Then I press "Submit"
-  #   And I should be on the users1 page
-  #   And I follow "Edit your Devices"
-  #   Then I follow "Cancel and to back to profile"
-  #   Then I should be on the users1 page
-  #   And I follow "Edit your Set Top Boxes"
-  #   Then I should be on the boxes1 page
-  #   Then I press "Submit"
-  #   And I should be on the users1 page
-=======
->>>>>>> refs/remotes/origin/remake
+   Scenario: Show and Edit and Destroy
+     When I follow "User management" 
+     Then I should be on the users page
+     And I follow "Show"
+     Then I am on the users1 page
+     And I follow "Edit your profile"
+     Then I fill in "First name" with "Ruijing"
+     Then I fill in "Last name" with "Bao"
+     Then I press "Update profile"
+     Then I should be on the users1 page
+     And I follow "Edit your profile"
+     Then I follow "Cancel and return to profile page"
+     Then I should be on the users1 page
+     And I follow "Edit Antenna Channel"
+     Then I am on the antenna page
+     Then I check "BET"
+     Then I press "Submit"
+     And I should be on the users1 page
+     And I follow "Edit Antenna Channel"
+     Then I follow "Cancel and to back to profile"
+     Then I should be on the users1 page
+     And I follow "Edit your Devices"
+     Then I should be on the devices1 page
+     # Then I should see "Apple"
+     Then I press "Submit"
+     And I should be on the users1 page
+     And I follow "Edit your Devices"
+     Then I follow "Cancel and to back to profile"
+     Then I should be on the users1 page
+     And I follow "Edit your Set Top Boxes"
+     Then I should be on the boxes1 page
+     Then I press "Submit"
+     And I should be on the users1 page
     
   
 
@@ -101,58 +95,12 @@ Background: Add package information
     Then I fill in "Last name" with "Bao"
     Then I press "Update profile"
     Then I should be on the users1 page
-<<<<<<< HEAD
-=======
-    And I follow "Edit your profile"
-    Then I follow "Cancel and return to profile page"
-    Then I should be on the users1 page
-    And I follow "Edit Antenna Channel"
-    Then I am on the antenna page
-    Then I check "BET"
-    Then I press "Submit"
-    And I should be on the users1 page
-    And I follow "Edit Antenna Channel"
-    Then I follow "Cancel and to back to profile"
-    Then I should be on the users1 page
-    And I follow "Edit your Devices"
-    Then I should be on the devices1 page
-    # Then I should see "Apple"
-    Then I press "Submit"
-    And I should be on the users1 page
-    And I follow "Edit your Devices"
-    Then I follow "Cancel and to back to profile"
-    Then I should be on the users1 page
-    And I follow "Edit your Set Top Boxes"
-    Then I should be on the boxes1 page
-    Then I press "Submit"
-    And I should be on the users1 page
-    
-  
-
-  Scenario:Recommendation
-    When I follow "User management" 
-    Then I should be on the users page
-    And I follow "Show"
-    Then I am on the users1 page
-    And I follow "Edit your profile"
-    Then I fill in "First name" with "Ruijing"
-    Then I fill in "Last name" with "Bao"
-    Then I press "Update profile"
-    Then I should be on the users1 page
->>>>>>> refs/remotes/origin/remake
     Then I follow "Calculate"
     Then I check "CBS"
     Then I check "BTN"
     Then I check "BET"
     Then I check "DVR"
-<<<<<<< HEAD
     Then I fill in "budget" with "60"
     Then I check "Only need one package?"
     Then I press "Calculate"
-=======
-    Then I fill in "Budget" with "60"
-    Then I check "Only need one package?"
-    Then I press "Calculate"
-    # Then I should be on the result page
->>>>>>> refs/remotes/origin/remake
     Then I should see "Package set"

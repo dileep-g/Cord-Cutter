@@ -306,6 +306,7 @@ DEPENDENCIES
   byebug (= 9.0.6)
   capybara (>= 2.15)
   coffee-rails (= 4.2.2)
+  cucumber
   cucumber-rails
   database_cleaner (= 1.4.1)
   jbuilder (= 2.7.0)

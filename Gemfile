@@ -27,6 +27,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'webdrivers', '~>3.0'
   gem 'capybara', '>= 2.15'
+  gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'ZenTest'
   gem 'rails-controller-testing'
