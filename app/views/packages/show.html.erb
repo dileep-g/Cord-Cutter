@@ -16,11 +16,12 @@
           <% end %>
         </ul>
       <% end %>
+      
     <ul><li>Available devices: </li></ul>
      <% if @package_devices != nil %>
         <ul>
           <% @package_devices.each do |device| %>
-            &diams;  <%= device.name %> &nbsp;
+            &diams; <%= device.name %> &nbsp;
           <% end %>
         </ul>
       <% end %>
@@ -35,4 +36,6 @@
   </p>
 
 <%= link_to 'Edit', edit_package_path(@package) %> |
+<%= link_to 'Add New Package', new_package_path %> |
+<%= link_to 'Add New Hierarchical Package', hierarchical_new_path %> |
 <%= link_to 'Back', packages_path %>

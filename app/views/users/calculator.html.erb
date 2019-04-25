@@ -94,6 +94,7 @@
             </div>
           </ul>
     <!--Form for would have channels-->
+<<<<<<< HEAD
     <%= f.label :budget %>
       <!--<%= f.text_field "budget" , placeholder: 'Enter your budget', class: 'form-control'%>-->
       <%= text_field_tag :budget, "Enter the budget",type: "number", class: 'form-control'%>
@@ -107,6 +108,18 @@
           <%= check_box_tag :flag_one_pack, 'true', checked = false,class: "checkbox inline"%>
       <h5 style="font-weight:bold">Only need one package?</h5>
      <% end %>
+=======
+    <%= f.label :Budget %>
+      <%= f.text_field :Budget , placeholder: 'Enter your budget', class: 'form-control'%>
+    <%= f.label :dvr, class: "checkbox inline" do %>
+      <%= f.check_box :dvr, class: "box"%>
+      <h4>DVR</h4>
+    <% end %>
+    <%= f.label :onepack, class: "checkbox inline" do %>
+      <%= f.check_box :flag_one_pack ,class: "box"%>
+      <h4>Only need one package?</h4>
+    <% end %>
+>>>>>>> refs/remotes/origin/remake
   <%= f.submit "Calculate", class: "btn btn-primary"  %>
   <% end %>
 </div>

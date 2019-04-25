@@ -73,14 +73,14 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if @user.id == current_user.id
-      @user.destroy
-      redirect_to root_path
-    elsif @user.admin == true
+    if @user.admin == true
       flash[:danger] = "You cannot delete an admin"
       redirect_to users_path
     else
       flash[:success] = "Delete success"
+      Antenna.where(user_id: @user.id).delete_all
+      OwnBox.where(user_id: @user.id).delete_all
+      OwnDevice.where(user_id: @user.id).delete_all
       @user.destroy
       redirect_to users_path
     end

@@ -1,8 +1,10 @@
 <table width=100%>
   <tbody>
     <% @devices.each do |device| %>
-      <tr class="show-list">
-        <td><%= device.name %></td>
+      <tr class="col-xs-10">
+        <ul class="list-unstyled">
+          <div class="col-xs-offset-0 col-xs-2 text-left">&diams; &nbsp;<span style="font-size: 11px"><%= device.name %><br> <br/></span></div>
+        </ul>  
       </tr>
     <% end %>
   </tbody>
