@@ -49,6 +49,9 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
+    Antenna.where(channel_id: @channel.id).delete_all
+    ProvideChannel.where(channel_id: @channel.id).delete_all
+    Perference.where(channel_id: @channel.id).delete_all
     @channel.destroy
     flash[:success] = "Delete success"
     redirect_to channels_path

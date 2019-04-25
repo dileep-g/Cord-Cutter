@@ -48,6 +48,8 @@ class SetTopBoxesController < ApplicationController
   # DELETE /set_top_boxes/1
   # DELETE /set_top_boxes/1.json
   def destroy
+    OwnBox.where(set_top_box_id: @set_top_box.id).delete_all
+    SupportBox.where(set_top_box_id: @set_top_box.id).delete_all
     @set_top_box.destroy
     flash[:success] = "Delete success"
     redirect_to set_top_boxes_path
