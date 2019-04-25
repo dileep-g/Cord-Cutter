@@ -8,7 +8,7 @@ Feature: Admin Powers
 #   Given I am on the signin page
 #   And I follow "Sign in with Google"
 #   Then I am on the home page
-Background: Admin is logged in
+Background: Add package information 
     Given I am on the signup page
     When I fill in "Email" with "test@test.com"
     And I fill in "Password" with "test123pass"
@@ -23,54 +23,84 @@ Background: Admin is logged in
     And I press "Login"
     Then I should be on the user page
     Given the following channels exist:
-    | name        | 
-    | Sun         | 
-    | KTV         | 
+    | name        |  
+    | BET         | 
+    | BTN         |
+    |       CBS   |
+    | A&E         |
+    | ABC         |
+    | AMC         |
+    When I follow "Package list" 
+    Then I follow "New Package"
+    Then I fill in "Name" with "CBS"
+    Then I fill in "Cost" with "60"
+    Then I check "DVR" 
+    Then I check "CBS"
+    Then I check "BET"
+    Then I check "BTN"
+    Then I press "Submit"
+    Then I should see "Create success!"
+    Then I follow "Back"
+    Then I follow "New Package"
+    Then I fill in "Name" with "AmazonPrime"
+    Then I fill in "Cost" with "50"
+    Then I check "DVR"
+    Then I check "CBS"
+    Then I check "BET"
+    Then I check "BTN"
+    Then I press "Submit"
+    Then I should see "Create success!"
     
-  Scenario: Show and Edit and Destroy
-    When I follow "User management" 
-    Then I should be on the users page
-    And I follow "Show"
+  # Scenario: Show and Edit and Destroy
+  #   When I follow "User management" 
+  #   Then I should be on the users page
+  #   And I follow "Show"
+  #   Then I am on the users1 page
+  #   And I follow "Edit your profile"
+  #   Then I fill in "First name" with "Ruijing"
+  #   Then I fill in "Last name" with "Bao"
+  #   Then I press "Update profile"
+  #   Then I should be on the users1 page
+  #   And I follow "Edit your profile"
+  #   Then I follow "Cancel and return to profile page"
+  #   Then I should be on the users1 page
+  #   And I follow "Edit Antenna Channel"
+  #   Then I am on the antenna page
+  #   Then I check "BET"
+  #   Then I press "Submit"
+  #   And I should be on the users1 page
+  #   And I follow "Edit Antenna Channel"
+  #   Then I follow "Cancel and to back to profile"
+  #   Then I should be on the users1 page
+  #   And I follow "Edit your Devices"
+  #   Then I should be on the devices1 page
+  #   # Then I should see "Apple"
+  #   Then I press "Submit"
+  #   And I should be on the users1 page
+  #   And I follow "Edit your Devices"
+  #   Then I follow "Cancel and to back to profile"
+  #   Then I should be on the users1 page
+  #   And I follow "Edit your Set Top Boxes"
+  #   Then I should be on the boxes1 page
+  #   Then I press "Submit"
+  #   And I should be on the users1 page
+    
+  
+
+  Scenario:Recommendation
+    When I follow "Profile" 
     Then I am on the users1 page
     And I follow "Edit your profile"
     Then I fill in "First name" with "Ruijing"
     Then I fill in "Last name" with "Bao"
     Then I press "Update profile"
     Then I should be on the users1 page
-    And I follow "Edit your profile"
-    Then I follow "Cancel and return to profile page"
-    Then I should be on the users1 page
-    And I follow "Edit antenna channel"
-    Then I am on the antenna page
-    Then I should see "KTV"
-    #Then I check "KTV"
-    Then I press "Submit"
-    And I should be on the users1 page
-    And I follow "Edit antenna channel"
-    Then I follow "Cancel and to back to profile"
-    Then I should be on the users1 page
-    And I follow "Edit your devices"
-    Then I should be on the devices1 page
-    # Then I should see "Apple"
-    Then I press "Submit"
-    And I should be on the users1 page
-    And I follow "Edit your devices"
-    Then I follow "Cancel and to back to profile"
-    Then I should be on the users1 page
-    And I follow "Edit your set top boxes"
-    Then I should be on the boxes1 page
-    Then I press "Submit"
-    And I should be on the users1 page
-    
-  
-
-  Scenario: Add Package
-    Given I am on the devices page
-    When I follow "New Device"
-    Then I should be on the new device page
-    And I fill in "Name" with "ABC"
-    #And I fill in "Cost" with "10"
-    #And I go with "Sun TV, KTV" from Channels
-    And I press "Create new device"
-    Then I should see "Create success!"
-    And I am on the device page
+    Then I follow "Calculate"
+    Then I check "CBS"
+    Then I check "BTN"
+    Then I check "BET"
+    Then I check "DVR"
+    Then I fill in "budget" with "60"
+    Then I check "Only need one package?"
+    Then I press "Calculate"
+    Then I should see "Package set"

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersHelper
+  
   before_action :set_user, only: [:show, :edit, :update, :destroy, :calculator, :calculate, :change_password, :update_password]
   before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :calculator, :change_password, :update_password]
   before_action :admin_user, only: [:index]
@@ -102,7 +104,11 @@ class UsersController < ApplicationController
     @budget = 0.0
     @flag_dvr = false
   end
-
+  
+  def result 
+    @results_overall = get_result(params[:id], params[:flag_one_pack], params[:budget], params[:flag_dvr])
+  end 
+  
   def calculate
     @channels = Channel.order(:name)
     Perference.delete_record(params[:id])
@@ -111,17 +117,19 @@ class UsersController < ApplicationController
     would_have = Antenna.remove_channel(params[:id], params[:would_have])
     ok_have = Antenna.remove_channel(params[:id], params[:ok_have])
     must_have, would_have, ok_have = Perference.remove_redudant(must_have, would_have, ok_have)
-    if params[:flag_one_pack] == 'true'
-      results = Perference.one_package(must_have)
-    else
-      results = Perference.cut_cord(must_have)
-    end
-    if params[:budget].to_f <= 0
-      params[:budget] = 9999
-    end
-    @results_overall = Perference.recommend_overall(results, params[:id], params[:budget], must_have, would_have, ok_have, params[:flag_dvr], params[:flag_one_pack])
     
-    render 'calculator'
+    if params[:flag_one_pack] == nil
+      params[:flag_one_pack] = 'false'
+    end
+    
+    if params[:flag_dvr] == nil
+      params[:flag_dvr] = 'false'
+    end
+
+    # @results_overall = Perference.recommend_overall(results, params[:id], params[:budget], must_have, would_have, ok_have, params[:flag_dvr], params[:flag_one_pack])
+    # params[:results] = @results_overall = @results_overall
+    
+    redirect_to result_path(params[:id], params[:flag_dvr], params[:budget], params[:flag_one_pack])
   end
 
   private
@@ -132,7 +140,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :remember_digest, :first_name, :last_name, :admin, :budget, :flag_dvr)
+      params.require(:user).permit(:email, :password, :password_confirmation, :remember_digest, :first_name, :last_name, :admin, :results, :result)
     end
 
     def logged_in_user

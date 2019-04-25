@@ -54,6 +54,8 @@ module NavigationHelpers
       own_box_path(1) 
     when /^the edit channels\s?page$/
       edit_channel_path(1) 
+    when /^the result\s?page$/
+      result_path(id: 1, flag_dvr: 'true',budget:60, flag_one_pack: 'true')
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

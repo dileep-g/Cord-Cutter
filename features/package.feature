@@ -22,8 +22,24 @@ Background: Admin is logged in
     And I fill in "Password" with "test123pass"
     And I press "Login"
     Then I should be on the user page
+Given the following channels exist:
+    | name        |  
+    | CBS         | 
+    | BET         | 
+    | BTN         |
+    | A&E         |
+    | ABC         |
+    | AMC         |
     
   Scenario: Show and Edit and Destroy
-    When I follow "Device list" 
-    Then I should be on the devices page
-
+    When I follow "Package list" 
+    Then I follow "New Package"
+    Then I fill in "Name" with "CBS"
+    Then I fill in "Cost" with "60"
+    Then I check "DVR" 
+    Then I check "CBS"
+    Then I check "BET"
+    Then I check "BTN"
+    Then I press "Submit"
+    Then I should see "Create success!"
+    

@@ -7,10 +7,10 @@
       <%= f.text_field :cost, placeholder: 'Enter package cost', class: 'form-control'%>
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
-      <p>
-        DVR
-        <%= f.check_box :DVR, checked_value: true, unchecked_vale: false, style: "width: 50px; float: left", class: "checkbox inline"%>
-      </p>
+        <%= f.label :DVR, class: "checkbox inline" do %>
+        <%= f.check_box :DVR,  class: "checkbox inline"%>
+        <h5>DVR</h5>
+        <% end %>
 
       <!--Form for channels-->
       <% if @channels == nil %>
@@ -26,9 +26,20 @@
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
                         <% if @package_channels != nil && @package_channels.include?(channel) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+                          <li><input type="text" id="box"><label for="box">
+                            <%= f.label 'channels', class: "checkbox inline" do %>
+                            <%= check_box_tag 'channels', channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%> 
+                            <%= channel.name %> 
+                          <% end %>
+                            </label></li>
                         <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+                          <li><input type="text" id="box"><label for="box">
+                            <%= f.label 'channels', class: "checkbox inline" do %>
+                            <%= check_box_tag 'channels', channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%> 
+                            <%= channel.name %> 
+                            <% end %>
+                           
+                            </label></li>
                         <% end %>
                       <% end %>  
                     </ul>

@@ -24,6 +24,8 @@ group :development, :test do
   gem "rspec-rails"
   gem 'database_cleaner', '1.4.1'
   gem 'simplecov', :require => false
+  gem 'selenium-webdriver'
+  gem 'webdrivers', '~>3.0'
   gem 'capybara', '>= 2.15'
   gem 'cucumber-rails', require: false
   gem 'ZenTest'

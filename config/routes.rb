@@ -32,5 +32,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/calculator', to: 'users#calculator', as: 'calculator'
   post '/users/:id/calculator', to: 'users#calculate', as: 'calculate'
+  
+  get '/users/:id/result/:results',to:'users#result', as:'result'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
