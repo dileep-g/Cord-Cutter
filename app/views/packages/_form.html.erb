@@ -26,20 +26,9 @@
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
                         <% if @package_channels != nil && @package_channels.include?(channel) %>
-                          <li><input type="text" id="box"><label for="box">
-                            <%= f.label 'channels', class: "checkbox inline" do %>
-                            <%= check_box_tag 'channels', channel.id, true, style: "width: 50px; float: left", class: "checkbox inline"%> 
-                            <%= channel.name %> 
-                          <% end %>
-                            </label></li>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
                         <% else %>
-                          <li><input type="text" id="box"><label for="box">
-                            <%= f.label 'channels', class: "checkbox inline" do %>
-                            <%= check_box_tag 'channels', channel.id, false, style: "width: 50px; float: left", class: "checkbox inline"%> 
-                            <%= channel.name %> 
-                            <% end %>
-                           
-                            </label></li>
+                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
                         <% end %>
                       <% end %>  
                     </ul>
