@@ -50,7 +50,7 @@ class DevicesController < ApplicationController
   # DELETE /devices/1.json
   def destroy
     OwnDevice.where(device_id: @device.id).delete_all
-    SupportDevice.where(devide_id: @devide.id).delete_all
+    SupportDevice.where(devide_id: @device.id).delete_all
     @device.destroy
     flash[:success] = "Delete success"
     redirect_to devices_path
