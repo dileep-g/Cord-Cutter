@@ -1,3 +1,19 @@
-  <% @channels.each do |channel| %>
-    &diams; <%= channel.name %> &nbsp;
-  <% end %>
+<html>
+<head>
+    <title></title>
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>-->
+</head>
+
+<table width=100%>
+  <tbody>
+    <% @channels.each do |channel| %>
+      <tr class="col-xs-10">
+        <ul class="list-unstyled">
+          <div class="col-xs-offset-0 col-xs-2 text-left">&diams; &nbsp;<span style="font-size: 11px"><%= channel.name %><br> <br/></span></div>
+        </ul>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</html>
