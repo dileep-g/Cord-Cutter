@@ -20,7 +20,8 @@
   <div class="wrapper dropdown-area">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Device <span class="caret"></span></button>
-          <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+          <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
             <% @all_devices.each do |device| %>  
               <li class="dropdown-list">
                 <%= label_tag do %>

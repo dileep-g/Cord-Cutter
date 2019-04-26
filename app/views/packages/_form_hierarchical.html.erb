@@ -1,3 +1,24 @@
+<script>
+      function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+    
     <%= form_for(@package) do |f| %>
       <%= render 'shared/error_messages', obj: @package %>
 
@@ -27,7 +48,8 @@
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
                       <% @channels.each do |channel| %>  
                         <li class="dropdown-list">
                           <%= label_tag do %>
@@ -54,7 +76,8 @@
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
                       <% @devices.each do |device| %>  
                         <li>
                           <%= label_tag do %>
@@ -80,7 +103,8 @@
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
                       <% @boxes.each do |box| %>  
                         <li>
                           <%= label_tag do %>
