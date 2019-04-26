@@ -16,14 +16,14 @@
 <% if @set_top_boxes == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-<!--<div style="margin-bottom: 20px">-->
+<div style="margin-bottom: 20px;">
   <%= form_for(update_own_box_path) do |f| %>
-  <div class="wrapper">
+  <div class="wrapper dropdown-area">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Box <span class="caret"></span></button>
           <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @all_set_top_boxes.each do |box| %>  
-              <li>
+              <li class="dropdown-list">
                 <%= label_tag do %>
                   <%= check_box_tag "items[]", box.id, @own_boxes.include?(box.id) , {style: "width: 20px"}%>
                   <%= box.name %>
@@ -37,7 +37,7 @@
   <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
   <%= link_to 'Cancel and to back to profile', @user %>
-<!--</div>-->
+</div>
 <% end %>
 
 </body>

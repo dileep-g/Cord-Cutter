@@ -175,3 +175,19 @@ input {
     border-bottom: 1px solid $gray-lighter;
      word-break : break-all; overflow:hidden;   }
 }
+
+.multi-checkbox {
+    width: auto;
+}
+
+.dropdown-area {
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+
+.dropdown-list {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}

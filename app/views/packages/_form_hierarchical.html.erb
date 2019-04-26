@@ -8,10 +8,15 @@
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
       <p>
-        DVR
-        <%= f.check_box :DVR, checked_value: true, unchecked_vale: false, style: "width: 50px; float: left", class: "checkbox inline"%>
+        <h4>
+          <%= label_tag do %>
+            <%= check_box_tag :DVR, '1', false, class: "multi-checkbox"%>
+            DVR
+          <% end %>
+        </h4>
       </p>
 
+      
       <!--Form for channels-->
       <% if @channels == nil %>
         <span>Ops, no channel yet, please contact admin.</span>
@@ -19,22 +24,22 @@
       <% else %>
       <!--<div style="margin-bottom: 20px">-->
           <h4>Channels</h4>
-            <ul>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
-                        <% if @package_channels != nil && @package_channels.include?(channel) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "channels[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% end %>
+                        <li class="dropdown-list">
+                          <%= label_tag do %>
+                            <%= check_box_tag "channels[]", channel.id, @package_channels.include?(channel) , class: "multi-checkbox"%>
+                            <%= channel.name %>
+                          <% end %>
+                        </li>
+
                       <% end %>  
                     </ul>
                 </div>
               </div>
-            </ul>
       <!--</div>-->
       <% end %>
       <!--Form for channels-->
@@ -46,22 +51,21 @@
       <% else %>
       <!--<div style="margin-bottom: 20px">-->
           <h4>Devices</h4>
-            <ul>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @devices.each do |device| %>  
-                        <% if @package_devices != nil && @package_devices.include?(device) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "devices[]", device.id, true, style: "width: 50px; float: left"%><%= device.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "devices[]", device.id, false, style: "width: 50px; float: left"%><%= device.name %></label></li>
-                        <% end %>
+                        <li>
+                          <%= label_tag do %>
+                            <%= check_box_tag "devices[]", device.id, @package_devices.include?(device) , class: "multi-checkbox"%>
+                            <%= device.name %>
+                          <% end %>
+                        </li>
                       <% end %>  
                     </ul>
                 </div>
               </div>
-            </ul>
       <!--</div>-->
       <% end %>
       <!--Form for devices-->
@@ -73,22 +77,21 @@
       <% else %>
       <!--<div style="margin-bottom: 20px">-->
           <h4>Set top boxes</h4>
-            <ul>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @boxes.each do |box| %>  
-                        <% if @package_boxes != nil && @package_boxes.include?(box) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "set_top_boxes[]", box.id, true, style: "width: 50px; float: left"%><%= box.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "set_top_boxes[]", box.id, false, style: "width: 50px; float: left"%><%= box.name %></label></li>
-                        <% end %>
+                        <li>
+                          <%= label_tag do %>
+                            <%= check_box_tag "set_top_boxes[]", box.id, @package_boxes.include?(box) , class: "multi-checkbox"%>
+                            <%= box.name %>
+                          <% end %>
+                        </li>
                       <% end %>  
                     </ul>
                 </div>
               </div>
-            </ul>
       <!--</div>-->
       <% end %>
       <!--Form for set top boxes-->

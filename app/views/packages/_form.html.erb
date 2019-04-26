@@ -10,7 +10,7 @@
       <p>
         <h4>
           <%= label_tag do %>
-            <%= check_box_tag :DVR, {style: "width: 20px"}%>
+            <%= check_box_tag :DVR, '1', false, class: "multi-checkbox"%>
             DVR
           <% end %>
         </h4>
@@ -24,15 +24,14 @@
       <% else %>
       <!--<div style="margin-bottom: 20px">-->
           <h4>Channels</h4>
-            <ul>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
                         <li>
                           <%= label_tag do %>
-                            <%= check_box_tag "channel[]", channel.id, @package_channels.include?(channel) , {style: "width: 20px"}%>
+                            <%= check_box_tag "channel[]", channel.id, @package_channels.include?(channel) , class: "multi-checkbox"%>
                             <%= channel.name %>
                           <% end %>
                         </li>
@@ -40,7 +39,6 @@
                     </ul>
                 </div>
               </div>
-            </ul>
       <!--</div>-->
       <% end %>
       <!--Form for channels-->
@@ -53,15 +51,14 @@
       <% else %>
       <!--<div style="margin-bottom: 20px">-->
           <h4>Devices</h4>
-            <ul>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @devices.each do |device| %>  
                         <li>
                           <%= label_tag do %>
-                            <%= check_box_tag "devices[]", device.id, @package_devices.include?(device) , {style: "width: 20px"}%>
+                            <%= check_box_tag "devices[]", device.id, @package_devices.include?(device) , class: "multi-checkbox"%>
                             <%= device.name %>
                           <% end %>
                         </li>
@@ -69,7 +66,6 @@
                     </ul>
                 </div>
               </div>
-            </ul>
       <!--</div>-->
       <% end %>
       <!--Form for devices-->
@@ -81,15 +77,14 @@
       <% else %>
       <!--<div style="margin-bottom: 20px">-->
           <h4>Set top boxes</h4>
-            <ul>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @boxes.each do |box| %>  
                         <li>
                           <%= label_tag do %>
-                            <%= check_box_tag "set_top_boxes[]", box.id, @package_boxes.include?(box) , {style: "width: 20px"}%>
+                            <%= check_box_tag "set_top_boxes[]", box.id, @package_boxes.include?(box) , class: "multi-checkbox"%>
                             <%= box.name %>
                           <% end %>
                         </li>
@@ -99,7 +94,6 @@
                     </ul>
                 </div>
               </div>
-            </ul>
       <!--</div>-->
       <% end %>
       <!--Form for set top boxes-->
