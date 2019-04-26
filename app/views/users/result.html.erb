@@ -58,7 +58,9 @@
       <% count = count+1 %>
     <% end %>
     <% else %>
+    <h2 style="margin-top: 50%;">Sorry, you budget is too low or you have not select any valid channel. Please calculate again.</h2>
     <% end %>
+          <%= link_to 'Go back to calculator', calculator_path %>
 </div>
 <%= debug params%>
 </body>

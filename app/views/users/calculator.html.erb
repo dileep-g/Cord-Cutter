@@ -94,7 +94,7 @@ function filterFunction3() {
                   <% @channels.each do |channel| %>  
                     <li class="dropdown-list">
                       <%= label_tag do %>
-                        <%= check_box_tag "woud_have[]", channel.id, @would_have.include?(channel.id), class: "multi-checkbox"%>
+                        <%= check_box_tag "would_have[]", channel.id, @would_have.include?(channel.id), class: "multi-checkbox"%>
                         <%= channel.name %>
                       <% end %>
                     </li>

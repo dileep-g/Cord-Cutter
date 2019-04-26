@@ -69,14 +69,10 @@ function filterFunction3() {
       <%= f.text_field :cost, placeholder: 'Enter package cost', class: 'form-control'%>
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
-      <p>
-        <h4>
-          <%= label_tag do %>
-            <%= check_box_tag :DVR, '1', false, class: "multi-checkbox"%>
-            DVR
-          <% end %>
-        </h4>
-      </p>
+      <%= f.label :DVR do %>
+      <%= f.check_box :DVR, class: "multi-checkbox" %>
+        <span>DVR</span>
+      <% end %>
 
 
       <!--Form for channels-->
@@ -158,7 +154,7 @@ function filterFunction3() {
                         <li class="dropdown-list">
                           <%= label_tag do %>
                           <% if !@package_boxes.nil? %>
-                            <%= check_box_tag "set_top_boxes[]", box.id,@package_boxes.include?(box), class: "multi-checkbox"%>
+                            <%= check_box_tag "set_top_boxes[]", box.id, @package_boxes.include?(box), class: "multi-checkbox"%>
                           <% else %>
                             <%= check_box_tag "set_top_boxes[]", box.id, false, class: "multi-checkbox"%>
                           <% end %>

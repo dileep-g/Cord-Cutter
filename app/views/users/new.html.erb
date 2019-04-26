@@ -16,8 +16,8 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, placeholder: 'Confirm password', class: 'form-control' %>
 
-      <%= f.label :admin, class: "checkbox inline" do %>
-        <%= f.check_box :admin, class: "box" %>
+      <%= f.label :admin do %>
+      <%= f.check_box :admin, class: "multi-checkbox" %>
         <span>Sign up as admin</span>
       <% end %>
 
