@@ -41,7 +41,7 @@ function filterFunction() {
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channel <span class="caret"></span></button>
           <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" class="search">
             <% @all_channels.each do |channel| %>  
               <li class="dropdown-list">
                 <%= label_tag do %>
