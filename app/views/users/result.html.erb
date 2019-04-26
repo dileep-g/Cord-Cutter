@@ -4,7 +4,7 @@
 </head>
 
 <body>
-<div>
+<div style="margin-top: 5%">
   <% if @results_overall != nil %>
     <% count=1 %>
     <% @results_overall.each do |result| %>
@@ -12,7 +12,7 @@
       <p>
       <span style="font-weight: bold">Recommended Packages: </span>
       <% result[:package].each do |package| %>
-        <%= "#{package}," %>
+        <span style="font-weight: bold"><%= "#{package}," %></span>
       <% end %>
       </p>
       <p>
@@ -42,15 +42,15 @@
       </p>
       <p>
       <% if result[:devices] == 0 %>
-        <%= "Some packages may not support your devices" %>
+        <span style="color: red"><%= "Some packages may not support your devices" %></span>
         <br>
       <% end %>
       <% if result[:boxes] == 0 %>
-        <%= "Some packages may not support your set top box" %>
+        <span style="color: red"><%= "Some packages may not support your set top box" %></span>
         <br>
       <% end %>
       <% if result[:dvr] == 0 %>
-        <%= "Packages does not satisfy your DVR perference" %>
+        <span style="color: red"><%= "Packages does not satisfy your DVR perference" %></span>
         <br>
       <% end %>
       </p>
