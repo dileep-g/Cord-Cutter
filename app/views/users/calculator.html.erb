@@ -1,30 +1,11 @@
-<script>
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  li = div.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-</script>
+
 
 <h1 class="title">Calculator</h1>
 <div style="margin-left: 15%; margin-right: 15%"
 <% if @channels == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-  <%= form_for(calculate_path) do |f| %>
+  <%= form_for(calculate_path) do %>
     <div style="margin-bottom: 20px">
       <p>
       <h4>Must have channels</h4>
@@ -32,7 +13,7 @@ function filterFunction() {
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
                       <% @channels.each do |channel| %>  
                         <li class="dropdown-list">
                           <%= label_tag do %>
@@ -54,7 +35,7 @@ function filterFunction() {
             <div class="btn-group">
               <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
                   <% @channels.each do |channel| %>  
                     <li class="dropdown-list">
                       <%= label_tag do %>
@@ -77,7 +58,7 @@ function filterFunction() {
             <div class="btn-group">
               <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
                   <% @channels.each do |channel| %>  
                     <li class="dropdown-list">
                       <%= label_tag do %>
@@ -113,7 +94,7 @@ function filterFunction() {
               </h4>
             </p>
             <p>
-              <%= f.submit "Calculate", class: "btn btn-primary"  %>
+          <%= f.submit "Calculate", class: "btn btn-primary"  %>
             </p>
           <% end %>
 </div>

@@ -1,26 +1,7 @@
     <html>
       
     <head>
-      <script>
-      function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  li = div.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-      </script>
+
     </head>  
     
     <body>
@@ -54,11 +35,11 @@ function filterFunction() {
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
                       <% @channels.each do |channel| %>  
                         <li>
                           <%= label_tag do %>
-                            <%= check_box_tag "channel[]", channel.id, @package_channels.include?(channel) , class: "multi-checkbox"%>
+                            <%= check_box_tag "channels[]", channel.id, @package_channels.include?(channel) , class: "multi-checkbox"%>
                             <%= channel.name %>
                           <% end %>
                         </li>
@@ -82,7 +63,7 @@ function filterFunction() {
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
                     <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
                       <% @devices.each do |device| %>  
                         <li>
                           <%= label_tag do %>
@@ -109,7 +90,7 @@ function filterFunction() {
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
                     <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
                       <% @boxes.each do |box| %>  
                         <li>
                           <%= label_tag do %>
