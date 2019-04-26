@@ -301,5 +301,16 @@
   }
 }
 
+.search {
+  border-box: box-sizing;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 13px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.search:focus {outline: 3px solid #ddd;}
 
 

@@ -1,3 +1,65 @@
+    <html>
+      
+    <head>
+      <script>
+function myFunction1() {
+  document.getElementById("myDropdown1").classList.toggle("show");
+}
+function filterFunction1() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput1");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown1");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+function myFunction2() {
+  document.getElementById("myDropdown2").classList.toggle("show");
+}
+function filterFunction2() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown2");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+function myFunction3() {
+  document.getElementById("myDropdown3").classList.toggle("show");
+}
+function filterFunction3() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown3");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+      </script>
+    </head>  
+    
+    <body>
     <%= form_for(@package) do |f| %>
       <%= render 'shared/error_messages', obj: @package %>
 
@@ -7,14 +69,10 @@
       <%= f.text_field :cost, placeholder: 'Enter package cost', class: 'form-control'%>
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
-      <p>
-        <h4>
-          <%= label_tag do %>
-            <%= check_box_tag :DVR, '1', false, class: "multi-checkbox"%>
-            DVR
-          <% end %>
-        </h4>
-      </p>
+      <%= f.label :DVR do %>
+      <%= f.check_box :DVR, class: "multi-checkbox" %>
+        <span>DVR</span>
+      <% end %>
 
 
       <!--Form for channels-->
@@ -27,11 +85,16 @@
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <ul id="myDropdown1" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput1" onkeyup="filterFunction1()" class="search">
                       <% @channels.each do |channel| %>  
-                        <li>
+                        <li class="dropdown-list">
                           <%= label_tag do %>
-                            <%= check_box_tag "channel[]", channel.id, @package_channels.include?(channel) , class: "multi-checkbox"%>
+                          <% if !@package_channels.nil? %>
+                            <%= check_box_tag "channels[]", channel.id, @package_channels.include?(channel), class: "multi-checkbox"%>
+                          <% else %>
+                            <%= check_box_tag "channels[]", channel.id, false, class: "multi-checkbox"%>
+                          <% end %>
                             <%= channel.name %>
                           <% end %>
                         </li>
@@ -54,11 +117,16 @@
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <ul id="myDropdown2" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <input type="text" placeholder="Search.." id="myInput2" onkeyup="filterFunction2()" class="search">
                       <% @devices.each do |device| %>  
-                        <li>
+                        <li class="dropdown-list">
                           <%= label_tag do %>
-                            <%= check_box_tag "devices[]", device.id, @package_devices.include?(device) , class: "multi-checkbox"%>
+                            <% if !@package_devices.nil? %>
+                              <%= check_box_tag "devices[]", device.id,( @package_devices.include?(device) ), class: "multi-checkbox"%>
+                            <% else %>
+                              <%= check_box_tag "devices[]", device.id,false, class: "multi-checkbox"%>
+                            <% end %>
                             <%= device.name %>
                           <% end %>
                         </li>
@@ -80,11 +148,16 @@
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                    <ul id="myDropdown3" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction3()" class="search">
                       <% @boxes.each do |box| %>  
-                        <li>
+                        <li class="dropdown-list">
                           <%= label_tag do %>
-                            <%= check_box_tag "set_top_boxes[]", box.id, @package_boxes.include?(box) , class: "multi-checkbox"%>
+                          <% if !@package_boxes.nil? %>
+                            <%= check_box_tag "set_top_boxes[]", box.id, @package_boxes.include?(box), class: "multi-checkbox"%>
+                          <% else %>
+                            <%= check_box_tag "set_top_boxes[]", box.id, false, class: "multi-checkbox"%>
+                          <% end %>
                             <%= box.name %>
                           <% end %>
                         </li>
@@ -101,3 +174,6 @@
       <%= f.submit "Submit", class: "btn btn-primary" %>
       
     <% end %>
+    
+    </body>
+    </html>

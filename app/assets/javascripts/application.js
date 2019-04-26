@@ -285,7 +285,7 @@
     $(document).off(namespace)
         .on('click' + namespace, closeOpened)
         .on('click' + namespace, toggle, proto.toggle)
-        .on('click' + namespace, '.dropdown-menu > li > label, .dropdown-menu > li > input[type="text"], .dropdown-menu.noclose > li', function (e) {
+        .on('click' + namespace, '.dropdown-menu > li > label, .dropdown-menu > input[type="text"], .dropdown-menu.noclose > li', function (e) {
             e.stopPropagation()
         })
         .on('change' + namespace, '.dropdown-menu > li > input[type="text"], .dropdown-menu > li > input[type="radio"]', proto.change)
