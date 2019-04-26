@@ -19,22 +19,22 @@
 <% else %>
 <div style="margin-bottom: 20px">
   <%= form_for(update_antenna_path) do |f| %>
-  <ul>
   <div class="wrapper">
-      <div class="btn-group">
+      <div class="btn-group", style="float: left;">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channel <span class="caret"></span></button>
           <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @all_channels.each do |channel| %>  
-                <% if @user.antennas.find_by(channel_id: channel.id) != nil %>
-                  <li><input type="text" id="channel"><label for="channel"><%= check_box_tag "items[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                <% else %>
-                  <li><input type="text" id="channel"><label for="channel"><%= check_box_tag "items[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
+              <li>
+                <%= label_tag do %>
+                  <%= check_box_tag "items[]", channel.id, !@user.antennas.find_by(channel_id: channel.id).nil? , {style: "width: 20px"}%>
+                  <%= channel.name %>
                 <% end %>
+              </li>
+
             <% end %> 
           </ul>
       </div>
   </div>
-  </ul>
   <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
 </div>

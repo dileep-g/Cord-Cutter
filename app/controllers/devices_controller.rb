@@ -59,7 +59,11 @@ class DevicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_device
-      @device = Device.find(params[:id])
+      if Device.where(id: params[:id]).blank?
+        redirect_to home_path
+      else
+        @device = Device.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

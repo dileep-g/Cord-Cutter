@@ -18,22 +18,22 @@
 <% else %>
 <!--<div style="margin-bottom: 20px">-->
   <%= form_for(update_own_box_path) do |f| %>
-  <ul>
   <div class="wrapper">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Box <span class="caret"></span></button>
           <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @all_set_top_boxes.each do |box| %>  
-                <% if @own_boxes.include?(box.id) %>
-                  <li><input type="text" id="box"><label for="box"><%= check_box_tag "items[]", box.id, true, style: "width: 50px; float: left"%><%= box.name %></label></li>
-                <% else %>
-                  <li><input type="text" id="box"><label for="box"><%= check_box_tag "items[]", box.id, false, style: "width: 50px; float: left"%><%= box.name %></label></li>
+              <li>
+                <%= label_tag do %>
+                  <%= check_box_tag "items[]", box.id, @own_boxes.include?(box.id) , {style: "width: 20px"}%>
+                  <%= box.name %>
                 <% end %>
+              </li>
+
             <% end %> 
           </ul>
       </div>
   </div>
-  </ul>
   <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
   <%= link_to 'Cancel and to back to profile', @user %>

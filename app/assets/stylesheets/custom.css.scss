@@ -149,9 +149,10 @@ input {
 }
 
 .checkbox {
-  margin-top: 0px;
-  margin-bottom: 20px;
-  margin-left: 20px;
+  overflow: hidden;
+  width: 100%;
+  clear: both;
+  height: 30px;
   span {
     margin-left: 0;
     font-weight: normal;

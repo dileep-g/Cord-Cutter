@@ -60,7 +60,11 @@ class ChannelsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_channel
-      @channel = Channel.find(params[:id])
+      if Channel.where(id: params[:id]).blank?
+        redirect_to home_path
+      else
+        @channel = Channel.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

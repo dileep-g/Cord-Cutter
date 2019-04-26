@@ -58,7 +58,11 @@ class SetTopBoxesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_set_top_box
-      @set_top_box = SetTopBox.find(params[:id])
+      if SetTopBox.where(id: params[:id]).blank?
+        redirect_to home_path
+      else
+        @set_top_box = SetTopBox.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

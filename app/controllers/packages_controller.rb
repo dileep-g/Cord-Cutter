@@ -93,7 +93,11 @@ class PackagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_package
-      @package = Package.find(params[:id])
+      if Package.where(id: params[:id]).blank?
+        redirect_to home_path
+      else
+        @package = Package.find(params[:id])
+      end
     end
 
     def find_relationship

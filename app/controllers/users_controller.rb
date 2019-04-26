@@ -117,7 +117,13 @@ class UsersController < ApplicationController
     would_have = Antenna.remove_channel(params[:id], params[:would_have])
     ok_have = Antenna.remove_channel(params[:id], params[:ok_have])
     must_have, would_have, ok_have = Perference.remove_redudant(must_have, would_have, ok_have)
-    
+   
+    if params[:budget] == ''
+      params[:budget] = 9999
+    else
+      params[:budget] = params[:budget].to_f
+    end
+
     if params[:flag_one_pack] == nil
       params[:flag_one_pack] = 'false'
     end
@@ -126,16 +132,17 @@ class UsersController < ApplicationController
       params[:flag_dvr] = 'false'
     end
 
-    # @results_overall = Perference.recommend_overall(results, params[:id], params[:budget], must_have, would_have, ok_have, params[:flag_dvr], params[:flag_one_pack])
-    # params[:results] = @results_overall = @results_overall
-    
-    redirect_to result_path(params[:id], params[:flag_dvr], params[:budget], params[:flag_one_pack])
+    redirect_to result_path(params[:id], params[:flag_one_pack], params[:flag_dvr], params[:budget])
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if User.where(id: params[:id]).blank?
+        redirect_to home_path
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

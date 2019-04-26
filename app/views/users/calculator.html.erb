@@ -4,131 +4,96 @@
 <% else %>
   <%= form_for(calculate_path) do |f| %>
     <div style="margin-bottom: 20px">
+      <p>
       <h4>Must have channels</h4>
-            <ul>
               <div class="wrapper">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
-                        <% if @must_have != nil && @must_have.include?(channel.id) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "must_have[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "must_have[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% end %>
+                        <li>
+                          <%= label_tag do %>
+                            <%= check_box_tag "must_have[]", channel.id, @must_have.include?(channel.id), {style: "width: 20px"}%>
+                            <%= channel.name %>
+                          <% end %>
+                        </li>
                       <% end %>  
                     </ul>
                 </div>
               </div>
-            </ul>
+      </p>
       <!--</div>-->
           
     <!--Form for must have channels-->
     
-      <h4>Would like to have channels</h4>
-            <ul>
-              <div class="wrapper">
-                <div class="btn-group">
-                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <% @channels.each do |channel| %>  
-                        <% if @would_have != nil && @would_have.include?(channel.id) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "would_have[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "would_have[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% end %>
-                      <% end %>  
-                    </ul>
-                </div>
-              </div>
-            </ul>
-          
+
+    <p>
+    <h4>
+      Would like to have channels
+          <div class="wrapper">
+            <div class="btn-group">
+              <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
+                <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                  <% @channels.each do |channel| %>  
+                    <li>
+                      <%= label_tag do %>
+                        <%= check_box_tag "woud_have[]", channel.id, @would_have.include?(channel.id), {style: "width: 20px"}%>
+                        <%= channel.name %>
+                      <% end %>
+                    </li>
+                  <% end %>  
+                </ul>
+            </div>
+          </div>
+    </h4>
+    </p>
+
     <!--Form for would have channels-->
-      <h4>OK to have channels</h4>
-            <ul>
-              <div class="wrapper">
-                <div class="btn-group">
-                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <% @channels.each do |channel| %>  
-                        <% if @ok_have != nil && @ok_have.include?(channel.id) %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "ok_have[]", channel.id, true, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% else %>
-                          <li><input type="text" id="box"><label for="box"><%= check_box_tag "ok_have[]", channel.id, false, style: "width: 50px; float: left"%><%= channel.name %></label></li>
-                        <% end %>
-                      <% end %>  
-                    </ul>
-                </div>
+    <p>
+    <h4>
+      OK to have channels
+          <div class="wrapper">
+            <div class="btn-group">
+              <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
+                <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                  <% @channels.each do |channel| %>  
+                    <li>
+                      <%= label_tag do %>
+                        <%= check_box_tag "ok_have[]", channel.id, @ok_have.include?(channel.id), {style: "width: 20px"}%>
+                        <%= channel.name %>
+                      <% end %>
+                    </li>
+                  <% end %>  
+                </ul>
               </div>
-            </ul>
-    <!--Form for would have channels-->
-      <h4><%= f.label :Budget, style:"font-weight: normal" %></h4>
-      <%= f.text_field :Budget , placeholder: 'Enter your budget', class: 'form-control'%>
-    <%= f.label :dvr, class: "checkbox inline" do %>
-      <%= f.check_box :dvr, class: "box"%>
-      <h4>DVR</h4>
-    <% end %>
-    <%= f.label :onepack, class: "checkbox inline" do %>
-      <%= f.check_box :flag_one_pack ,class: "box"%>
-      <h4>Only need one package?</h4>
-     <% end %>
-  <%= f.submit "Calculate", class: "btn btn-primary"  %>
-  <% end %>
-</div>
-<div>
-  <% if @results_overall != nil %>
-    <% count=1 %>
-    <% @results_overall.each do |result| %>
-      <h4 style="font-weight: bold">Package set #<%= count %></h4>
-      <p>
-      <span style="font-weight: bold">Recommended Packages: </span>
-      <% result[:package].each do |package| %>
-        <%= "#{package}," %>
-      <% end %>
-      </p>
-      <p>
-      Including:
-      </p>
-      <li style="line-height: 20px">Must Have Channels: </li>
-        <ul>
-        <% result[:must_have].each do |channel| %>
-          <%= "#{channel}," %>
-        <% end %>
-      </ul>
-      <li style="line-height: 20px">Would Like to Have Channels: </li>
-        <ul>      
-        <% result[:would_have].each do |channel| %>
-          <%= "#{channel}," %>
-        <% end %>
-        </ul>
-      <li style="line-height: 20px">OK to Have Channels: </li>
-        <ul> 
-        <% result[:ok_have].each do |channel| %>
-          <%= "#{channel}," %>
-        <% end %>
-        </ul>
-      </p>
-      <p style="font-weight: bold">
-      <%= "Cost: #{result[:expense].round(2)}" %>
-      </p>
-      <p>
-      <% if result[:devices] == 0 %>
-        <%= "Some packages may not support your devices" %>
-        <br>
-      <% end %>
-      <% if result[:boxes] == 0 %>
-        <%= "Some packages may not support your set top box" %>
-        <br>
-      <% end %>
-      <% if result[:dvr] == 0 %>
-        <%= "Packages does not satisfy your DVR perference" %>
-        <br>
-      <% end %>
-      </p>
-      <hr></hr>
-      <% count = count+1 %>
-    <% end %>
-  <% end %>
+            </div>
+    </h4>
+    </p>
+            <!--Form for would have channels-->
+            <p>
+              <h4>Budget</h4>
+              <%= text_field_tag :budget, nil, placeholder: 'Enter your budget', class: 'form-control'%>
+            </p>
+            <p>
+              <h4>
+                <%= label_tag do %>
+                  DVR
+                  <%= check_box_tag :flag_dvr, true, false, {style: "width: 20px"}%>
+                <% end %>
+              </h4>
+            </p>
+            <p>
+              <h4>
+                <%= label_tag do %>
+                  Only need one package?
+                  <%= check_box_tag :flag_one_package, true, false, {style: "width: 20px"}%>
+                <% end %>
+              </h4>
+            </p>
+            <p>
+              <%= f.submit "Calculate", class: "btn btn-primary"  %>
+            </p>
+          <% end %>
 </div>
 <% end %>
 

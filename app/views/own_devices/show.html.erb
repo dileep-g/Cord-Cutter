@@ -23,11 +23,12 @@
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Device <span class="caret"></span></button>
           <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @all_devices.each do |device| %>  
-                <% if @own_devices.include?(device.id) %>
-                  <li><input type="text" id="device"><label for="device"><%= check_box_tag "items[]", device.id, true, style: "width: 50px; float: left"%><%= device.name %></label></li>
-                <% else %>
-                  <li><input type="text" id="device"><label for="device"><%= check_box_tag "items[]", device.id, false, style: "width: 50px; float: left"%><%= device.name %></label></li>
+              <li>
+                <%= label_tag do %>
+                  <%= check_box_tag "items[]", device.id, @own_devices.include?(device.id) , {style: "width: 20px"}%>
+                  <%= device.name %>
                 <% end %>
+              </li>
             <% end %> 
           </ul>
       </div>
