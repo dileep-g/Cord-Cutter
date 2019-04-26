@@ -1,19 +1,74 @@
-
+<script>
+function myFunction1() {
+  document.getElementById("myDropdown1").classList.toggle("show");
+}
+function filterFunction1() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput1");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown1");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+function myFunction2() {
+  document.getElementById("myDropdown2").classList.toggle("show");
+}
+function filterFunction2() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown2");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+function myFunction3() {
+  document.getElementById("myDropdown3").classList.toggle("show");
+}
+function filterFunction3() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown3");
+  li = div.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
 
 <h1 class="title">Calculator</h1>
-<div style="margin-left: 15%; margin-right: 15%"
+<div style="margin-left: 15%; margin-right: 15%">
 <% if @channels == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-  <%= form_for(calculate_path) do %>
+  <%= form_for(calculate_path) do |f| %>
     <div style="margin-bottom: 20px">
       <p>
       <h4>Must have channels</h4>
               <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
+                    <ul id="myDropdown1" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput1" onkeyup="filterFunction1()" class="search">
                       <% @channels.each do |channel| %>  
                         <li class="dropdown-list">
                           <%= label_tag do %>
@@ -34,8 +89,8 @@
           <div class="wrapper dropdown-area">
             <div class="btn-group">
               <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
+                    <ul id="myDropdown2" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput2" onkeyup="filterFunction2()" class="search">
                   <% @channels.each do |channel| %>  
                     <li class="dropdown-list">
                       <%= label_tag do %>
@@ -57,8 +112,8 @@
           <div class="wrapper dropdown-area">
             <div class="btn-group">
               <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul id="myDropdown" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
+                    <ul id="myDropdown3" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
+                      <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction3()" class="search">
                   <% @channels.each do |channel| %>  
                     <li class="dropdown-list">
                       <%= label_tag do %>
@@ -94,7 +149,7 @@
               </h4>
             </p>
             <p>
-          <%= f.submit "Calculate", class: "btn btn-primary"  %>
+              <%= f.submit "Calculate", class: "btn btn-primary"  %>
             </p>
           <% end %>
 </div>

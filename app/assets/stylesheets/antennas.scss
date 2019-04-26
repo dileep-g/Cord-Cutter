@@ -301,7 +301,7 @@
   }
 }
 
-#myInput {
+.search {
   border-box: box-sizing;
   background-position: 14px 12px;
   background-repeat: no-repeat;
@@ -311,6 +311,6 @@
   border-bottom: 1px solid #ddd;
 }
 
-#myInput:focus {outline: 3px solid #ddd;}
+.search:focus {outline: 3px solid #ddd;}
 
 
