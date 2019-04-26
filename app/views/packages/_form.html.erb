@@ -9,7 +9,7 @@
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
         <%= f.label :DVR, class: "checkbox inline" do %>
         <%= f.check_box :DVR,  class: "checkbox inline"%>
-        <h5>DVR</h5>
+        <h4>DVR</h4>
         <% end %>
 
       <!--Form for channels-->
@@ -22,7 +22,7 @@
             <ul>
               <div class="wrapper">
                 <div class="btn-group">
-                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
+                  <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
                         <% if @package_channels != nil && @package_channels.include?(channel) %>
@@ -50,7 +50,7 @@
             <ul>
               <div class="wrapper">
                 <div class="btn-group">
-                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
+                  <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Devices <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @devices.each do |device| %>  
                         <% if @package_devices != nil && @package_devices.include?(device) %>
@@ -77,7 +77,7 @@
             <ul>
               <div class="wrapper">
                 <div class="btn-group">
-                  <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
+                  <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Set Top Boxes <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @boxes.each do |box| %>  
                         <% if @package_boxes != nil && @package_boxes.include?(box) %>

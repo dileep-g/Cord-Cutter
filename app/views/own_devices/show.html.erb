@@ -9,17 +9,20 @@
 
 <body>
 <h1 class="title">Device list</h1>
+<h5>Your Devices:</h5>  
+<p><%= render '/users/form_device' %></p>
+
 <% if @devices == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
 <!--<div style="margin-bottom: 20px">-->
-  <%= form_for(update_own_device_path) do %>
+  <%= form_for(update_own_device_path) do |f|%>
   <ul>
   <div class="wrapper">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Device <span class="caret"></span></button>
           <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-            <% @devices.each do |device| %>  
+            <% @all_devices.each do |device| %>  
                 <% if @own_devices.include?(device.id) %>
                   <li><input type="text" id="device"><label for="device"><%= check_box_tag "items[]", device.id, true, style: "width: 50px; float: left"%><%= device.name %></label></li>
                 <% else %>
@@ -30,7 +33,7 @@
       </div>
   </div>
   </ul>
-  <%= button_to "Submit",  class: "btn btn-primary" %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
   <%= link_to 'Cancel and to back to profile', @user %>
 <!--</div>-->

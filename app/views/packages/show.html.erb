@@ -11,26 +11,50 @@
     <ul><li>Include channels: </li></ul>
       <% if @package_channels != nil %>
         <ul>
-          <% @package_channels.each do |channel| %>
-            &diams; <%= channel.name %> &nbsp;
-          <% end %>
+          <table width=100%>
+            <tbody>
+              <% @package_channels.each do |channel| %>
+                <tr class="col-xs-10">
+                  <ul class="list-unstyled">
+                    <div class="col-xs-offset-0 col-xs-2 text-left">&diams; &nbsp;<span style="font-size: 11px"><%= channel.name %><br> <br/></span></div>
+                  </ul>  
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
         </ul>
       <% end %>
       
     <ul><li>Available devices: </li></ul>
      <% if @package_devices != nil %>
         <ul>
-          <% @package_devices.each do |device| %>
-            &diams; <%= device.name %> &nbsp;
-          <% end %>
+          <table width=100%>
+            <tbody>
+              <% @package_devices.each do |device| %>
+                <tr class="col-xs-10">
+                  <ul class="list-unstyled">
+                    <div class="col-xs-offset-0 col-xs-2 text-left">&diams; &nbsp;<span style="font-size: 11px"><%= device.name %><br> <br/></span></div>
+                  </ul>  
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
         </ul>
       <% end %>
     <ul><li>Available set top boxes: </li></ul>
      <% if @package_boxes != nil %>
         <ul>
-          <% @package_boxes.each do |box| %>
-           &diams;  <%= box.name %> &nbsp;
-          <% end %>
+          <table width=100%>
+            <tbody>
+              <% @package_boxes.each do |box| %>
+                <tr class="col-xs-10">
+                  <ul class="list-unstyled">
+                    <div class="col-xs-offset-0 col-xs-2 text-left">&diams; &nbsp;<span style="font-size: 11px"><%= box.name %><br> <br/></span></div>
+                  </ul>  
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
         </ul>
       <% end %>
   </p>
