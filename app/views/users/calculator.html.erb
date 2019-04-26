@@ -1,4 +1,5 @@
 <h1 class="title">Calculator</h1>
+<div style="margin-left: 15%; margin-right: 15%"
 <% if @channels == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
@@ -6,14 +7,14 @@
     <div style="margin-bottom: 20px">
       <p>
       <h4>Must have channels</h4>
-              <div class="wrapper">
+              <div class="wrapper dropdown-area">
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                     <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                       <% @channels.each do |channel| %>  
-                        <li>
+                        <li class="dropdown-list">
                           <%= label_tag do %>
-                            <%= check_box_tag "must_have[]", channel.id, @must_have.include?(channel.id), {style: "width: 20px"}%>
+                            <%= check_box_tag "must_have[]", channel.id, @must_have.include?(channel.id), class: "multi-checkbox"%>
                             <%= channel.name %>
                           <% end %>
                         </li>
@@ -23,21 +24,18 @@
               </div>
       </p>
       <!--</div>-->
-          
     <!--Form for must have channels-->
-    
-
     <p>
     <h4>
       Would like to have channels
-          <div class="wrapper">
+          <div class="wrapper dropdown-area">
             <div class="btn-group">
               <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                 <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                   <% @channels.each do |channel| %>  
-                    <li>
+                    <li class="dropdown-list">
                       <%= label_tag do %>
-                        <%= check_box_tag "woud_have[]", channel.id, @would_have.include?(channel.id), {style: "width: 20px"}%>
+                        <%= check_box_tag "woud_have[]", channel.id, @would_have.include?(channel.id), class: "multi-checkbox"%>
                         <%= channel.name %>
                       <% end %>
                     </li>
@@ -52,14 +50,14 @@
     <p>
     <h4>
       OK to have channels
-          <div class="wrapper">
+          <div class="wrapper dropdown-area">
             <div class="btn-group">
               <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
                 <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
                   <% @channels.each do |channel| %>  
-                    <li>
+                    <li class="dropdown-list">
                       <%= label_tag do %>
-                        <%= check_box_tag "ok_have[]", channel.id, @ok_have.include?(channel.id), {style: "width: 20px"}%>
+                        <%= check_box_tag "ok_have[]", channel.id, @ok_have.include?(channel.id), class: "multi-checkbox"%>
                         <%= channel.name %>
                       <% end %>
                     </li>
@@ -78,7 +76,7 @@
               <h4>
                 <%= label_tag do %>
                   DVR
-                  <%= check_box_tag :flag_dvr, true, false, {style: "width: 20px"}%>
+                  <%= check_box_tag :flag_dvr, true, false,  class: "multi-checkbox"%>
                 <% end %>
               </h4>
             </p>
@@ -86,7 +84,7 @@
               <h4>
                 <%= label_tag do %>
                   Only need one package?
-                  <%= check_box_tag :flag_one_package, true, false, {style: "width: 20px"}%>
+                  <%= check_box_tag :flag_one_package, true, false, class: "multi-checkbox"%>
                 <% end %>
               </h4>
             </p>
@@ -96,4 +94,5 @@
           <% end %>
 </div>
 <% end %>
+</div>
 

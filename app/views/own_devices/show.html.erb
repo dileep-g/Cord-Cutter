@@ -15,15 +15,14 @@
 <% if @devices == nil %>
   <span>Ops, no channel yet, please contact admin.</span>
 <% else %>
-<!--<div style="margin-bottom: 20px">-->
+<div style="margin-bottom: 20px;">
   <%= form_for(update_own_device_path) do |f|%>
-  <ul>
-  <div class="wrapper">
+  <div class="wrapper dropdown-area">
       <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Device <span class="caret"></span></button>
           <ul style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
             <% @all_devices.each do |device| %>  
-              <li>
+              <li class="dropdown-list">
                 <%= label_tag do %>
                   <%= check_box_tag "items[]", device.id, @own_devices.include?(device.id) , {style: "width: 20px"}%>
                   <%= device.name %>
@@ -33,11 +32,10 @@
           </ul>
       </div>
   </div>
-  </ul>
   <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
   <%= link_to 'Cancel and to back to profile', @user %>
-<!--</div>-->
+</div>
 <% end %>
 
 </body>
