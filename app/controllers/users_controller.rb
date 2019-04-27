@@ -107,6 +107,7 @@ class UsersController < ApplicationController
   
   def result 
     @results_overall = get_result(params[:id], params[:flag_one_pack], params[:budget], params[:flag_dvr])
+    @covered_antenna = Antenna.covered_channels(params[:id])
   end 
   
   def calculate
@@ -117,7 +118,6 @@ class UsersController < ApplicationController
     would_have = Antenna.remove_channel(params[:id], params[:would_have])
     ok_have = Antenna.remove_channel(params[:id], params[:ok_have])
     must_have, would_have, ok_have = Perference.remove_redudant(must_have, would_have, ok_have)
-   
     if params[:budget] == ''
       params[:budget] = 9999
     else

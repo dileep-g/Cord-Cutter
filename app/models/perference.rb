@@ -138,11 +138,14 @@ class Perference < ApplicationRecord
       result_hash = Hash.new
 
       # find name of packages
-      names = []
+      packages = []
       result.each do |package|
-        names << Package.find(package).name
+        hash_package = {}
+        hash_package[:name] = Package.find(package).name
+        hash_package[:link] = Package.find(package).link
+        packages << hash_package
       end
-      result_hash[:package] = names
+      result_hash[:package] = packages
 
       # find all information of packages
       result_devices = []

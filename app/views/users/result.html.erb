@@ -4,15 +4,26 @@
 </head>
 
 <body>
-<div style="margin-top: 10%">
-  <% if @results_overall != nil %>
+<div style="margin-top: 5%">
+  <h4 style="font-weight: bold">
+    Channels already covered by antenna:
+    <h5 style="font-weight: normal;">
+    <% if !@covered_antenna.nil? %>
+      <% @covered_antenna.each do |channel| %>
+        <%= "#{channel}," %>
+      <% end %>
+    <% end %>
+    </h5>
+  </h4>
+  <hr></hr>
+  <% if !@results_overall.empty? %>
     <% count=1 %>
     <% @results_overall.each do |result| %>
       <h4 style="font-weight: bold">Package set #<%= count %></h4>
       <p>
       <span style="font-weight: bold">Recommended Packages: </span>
       <% result[:package].each do |package| %>
-        <span style="font-weight: bold"><%= "#{package}," %></span>
+        <span style="font-weight: bold"><%= link_to package[:name], package[:link] %></span>
       <% end %>
       </p>
       <p>
@@ -58,11 +69,10 @@
       <% count = count+1 %>
     <% end %>
     <% else %>
-    <h2 style="margin-top: 50%;">Sorry, you budget is too low or you have not select any valid channel. Please calculate again.</h2>
+      <h3 style="font-weight: bold; margin-bottom: 10%">Sorry, you budget is too low or the channels you selected are invalid. Please calculate again.</h2>
     <% end %>
           <%= link_to 'Go back to calculator', calculator_path %>
 </div>
-<%= debug params%>
 </body>
 
 </html>

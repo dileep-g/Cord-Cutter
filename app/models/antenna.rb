@@ -2,6 +2,14 @@ class Antenna < ApplicationRecord
   belongs_to :user
   belongs_to :channel
 
+  def Antenna.covered_channels(user_id)
+    channels_names = []
+    antennas = Antenna.where(user_id: user_id).find_each
+    antennas.each do |antenna|
+      channels_names << Channel.find(antenna.channel_id).name
+    end
+    return channels_names
+  end
   def Antenna.delete_record(user_id)
     antennas = Antenna.where(user_id: user_id).find_each
     antennas.each do |antenna|
