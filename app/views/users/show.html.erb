@@ -42,7 +42,7 @@
   </p>
   <div class="users">
   <%= link_to 'Edit your profile', edit_user_path(@user) %> | 
-  <%= link_to 'Change your password', '#' %>
+  <!--<%= link_to 'Change your password', '#' %>-->
   </div>
   
   <br></br>
@@ -70,7 +70,7 @@
 </div>
 
 <br></br>
-<%= link_to "Calculate", calculator_path(current_user),class: "btn btn-primary" %>
+<%= link_to "Calculate", calculator_path(current_user),class: "btn btn-primary", style: "color: #fff" %>
 
 <script>
 var coll = document.getElementsByClassName("collapsible");
