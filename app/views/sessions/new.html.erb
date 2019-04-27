@@ -11,8 +11,8 @@
       <%= f.label :password %>
       <%= f.password_field :password , placeholder: 'Enter password', class: 'form-control'%>
 
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me, class: "box" %>
+      <%= f.label :remember_me do %>
+      <%= f.check_box :remember_me, class: "multi-checkbox" %>
         <span>Remember me on this computer</span>
       <% end %>
 
