@@ -36,6 +36,7 @@ Given the following channels exist:
     Then I follow "New Package"
     Then I fill in "Name" with "CBS"
     Then I fill in "Cost" with "60"
+    And I fill in "Link" with "https://www.Youtube.com"
     Then I check "DVR" 
     Then I check "CBS"
     Then I check "BET"

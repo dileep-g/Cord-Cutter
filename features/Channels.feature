@@ -51,14 +51,7 @@ Scenario: Show and Edit and Destroy
     And I follow "Cancel and return to channel information"
     Then I should be on the channels1 page
   
-Scenario: More Info Channels
-  When I go to the edit channel page for "Sun TV"
-  And I fill in "Name" with "KTV"
-  # And I go with "Movies" from Category
-  And I press "Update Channel"
-  Then I should see "Channel was successfully updated"
-  And the category of "KTV" should be "Movies"
-  And I should be on the channel details page for "KTV"
+
   
 # Scenario: Edit Channel
 #   When I am on the channel details page for "Sun TV"
@@ -68,9 +61,23 @@ Scenario: More Info Channels
 #   Then I should be on the channels page
   
 Scenario: Add new Channel
+  Given I am on the signup page
+    When I fill in "Email" with "test@test.com"
+    And I fill in "Password" with "test123pass"
+    And I fill in "Confirmation" with "test123pass"
+    And I check "Sign up as admin"
+    And I press "Create my account"
+    Then I should be on the user page
+    And I should see "Sign up success!" 
+    Given I am on the login page
+    When I fill in "Email" with "test@test.com"
+    And I fill in "Password" with "test123pass"
+    And I press "Login"
+    Then I should be on the user page
+    When I follow "Channel list" 
+    Then I should be on the channels page
   When I am on the channels page
   When follow "New Channel"
   And I fill in "Name" with "Jaya TV"
-  And I go with "Other" from Category
-  And I press "Create Channel"
-  Then I should be on the channel details page for "Jaya TV"
+  And I press "Create new channel"
+  Then I should see "Create success!"

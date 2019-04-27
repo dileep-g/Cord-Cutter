@@ -30,6 +30,14 @@ Background: Add package information
     | A&E         |
     | ABC         |
     | AMC         |
+    Given the following devices exist:
+    | name        | 
+    | Mobile      |
+  
+    Given the following settopboxes exist:
+    | name        | 
+    | Apple       |
+
     When I follow "Package list" 
     Then I follow "New Package"
     Then I fill in "Name" with "CBS"
@@ -38,16 +46,19 @@ Background: Add package information
     Then I check "CBS"
     Then I check "BET"
     Then I check "BTN"
+    Then I check "Mobile"
+    Then I check "Apple"
+    And I fill in "Link" with "https://www.Youtube.com"
     Then I press "Submit"
     Then I should see "Create success!"
     Then I follow "Back"
     Then I follow "New Package"
     Then I fill in "Name" with "AmazonPrime"
     Then I fill in "Cost" with "50"
-    Then I check "DVR"
-    Then I check "CBS"
-    Then I check "BET"
-    Then I check "BTN"
+    And I fill in "Link" with "https://www.Youtube.com"
+    Then I check "A&E"
+    Then I check "ABC"
+    Then I check "AMC"
     Then I press "Submit"
     Then I should see "Create success!"
     
@@ -104,3 +115,10 @@ Background: Add package information
     Then I check "Only need one package?"
     Then I press "Calculate"
     Then I should see "Package set"
+    Then I should see "60"
+    Then I should see "CBS"
+    Then I follow "Go back to calculator"
+    Then I check "A&E"
+    Then I fill in "budget" with "50"
+    Then I press "Calculate"
+    Then I should see "Go back to calculator"

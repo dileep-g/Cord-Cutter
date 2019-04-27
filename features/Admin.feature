@@ -23,26 +23,39 @@ Background: Admin is logged in
     And I press "Login"
     Then I should be on the user page
   
-  Given the following channels exist:
-  | name        | 
-  | Sun TV      | 
-  | KTV         | 
+    Given the following channels exist:
+    | name        | 
+    | Sun TV      | 
+    | KTV         | 
 
-  Given the following packages exist:
-  | name        | cost |
-  | Sun Network |  50  |
+    Given the following packages exist:
+    | name        | cost |
+    | Sun Network |  50  |
   
-  Given the following devices exist:
-  | name        | 
-  | Mobile     |
+    Given the following devices exist:
+    | name        | 
+    | Mobile     |
   
-  Given the following settopboxes exist:
-  | name        | 
-  | Apple       |
+    Given the following settopboxes exist:
+    | name        | 
+    | Apple       |
   
   Scenario: Show and Edit and Destroy
+    Given I am on the packages page
+    When I follow "New Package"
+    Then I should be on the new package page
+    And I fill in "Name" with "ABC"
+    And I fill in "Cost" with "10"
+    And I fill in "Link" with "https://www.Youtube.com"
+    Then I check "DVR"
+    Then I check "KTV"
+    Then I check "Mobile"
+    Then I check "Apple"
+    And I press "Submit"
+    Then I should see "Create success!"
     When I follow "Package list"
     Then I should be on the packages page
+    Then I should see "Show"
     And I follow "Show"
     Then I am on the package page
     And I follow "Back"
@@ -60,7 +73,7 @@ Background: Admin is logged in
     Then I should be on the new package page
     And I fill in "Name" with "ABC"
     And I fill in "Cost" with "10"
-    And I fill in "Link" with "Youtube"
+    And I fill in "Link" with "https://www.Youtube.com"
     Then I check "DVR"
     Then I check "KTV"
     Then I check "Mobile"
@@ -73,9 +86,13 @@ Background: Admin is logged in
     Given I am on the packages page
     When I follow "New Hierarchical Package"
     Then I follow "Select"
+    Then I fill in "Name" with "Sun1"
     Then I check "Sun TV"
+    Then I fill in "Cost" with "100"
+    Then I fill in "Link" with "https://www.Youtube1.com"
+    Then I check "DVR"
     Then I press "Submit"
-    Then I should see "Create success!"
+    Then I should see "Package name"
     
 
   # Scenario: Add Stream Package
