@@ -23,7 +23,7 @@
       <p>
       <span style="font-weight: bold">Recommended Packages: </span>
       <% result[:package].each do |package| %>
-        <span style="font-weight: bold"><%= link_to package[:name], package[:link], target: 'new' %></span>
+        <span style="font-weight: bold"><%= link_to "#{package[:name]}, " , package[:link], target: 'new' %></span>
       <% end %>
       </p>
       <p>
