@@ -278,6 +278,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    watir (6.16.5)
+      regexp_parser (~> 1.2)
+      selenium-webdriver (~> 3.6)
     web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -329,6 +332,7 @@ DEPENDENCIES
   turbolinks (= 5.0.1)
   tzinfo-data
   uglifier (= 3.2.0)
+  watir (~> 6.0)
   web-console (= 3.5.1)
   webdrivers (~> 3.0)
   will_paginate (~> 3.1.0)

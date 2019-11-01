@@ -15,6 +15,8 @@ gem 'bootstrap-will_paginate'
 gem 'will_paginate', '~> 3.1.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'seed_dump'
+gem 'webdrivers',   '~>3.0'
+gem 'watir',        '~>6.0'
 
 
 group :development, :test do
@@ -26,7 +28,6 @@ group :development, :test do
   gem 'database_cleaner', '1.4.1'
   gem 'simplecov', :require => false
   gem 'selenium-webdriver'
-  gem 'webdrivers', '~>3.0'
   gem 'capybara', '>= 2.15'
   gem 'cucumber'
   gem 'cucumber-rails', require: false
