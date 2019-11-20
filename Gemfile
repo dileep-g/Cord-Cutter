@@ -15,9 +15,9 @@ gem 'bootstrap-will_paginate'
 gem 'will_paginate', '~> 3.1.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'seed_dump'
-gem 'webdrivers',   '~>3.0'
+gem 'webdrivers',   '~>4.0'
 gem 'watir',        '~>6.0'
-
+gem 'htmlentities'
 
 group :development, :test do
   # gem 'sqlite3', '1.3.13'

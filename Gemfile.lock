@@ -114,6 +114,7 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
+    htmlentities (4.3.4)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -286,10 +287,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webdrivers (3.8.0)
+    webdrivers (4.1.2)
       nokogiri (~> 1.6)
       rubyzip (~> 1.0)
-      selenium-webdriver (~> 3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -311,6 +312,7 @@ DEPENDENCIES
   cucumber
   cucumber-rails
   database_cleaner (= 1.4.1)
+  htmlentities
   jbuilder (= 2.7.0)
   jquery-rails (= 4.3.1)
   listen (= 3.1.5)
@@ -334,8 +336,8 @@ DEPENDENCIES
   uglifier (= 3.2.0)
   watir (~> 6.0)
   web-console (= 3.5.1)
-  webdrivers (~> 3.0)
+  webdrivers (~> 4.0)
   will_paginate (~> 3.1.0)
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

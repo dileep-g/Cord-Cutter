@@ -1,4 +1,10 @@
+require 'webdrivers'
+require 'watir'
+require 'nokogiri'
+require 'htmlentities'
+
 class PackagesController < ApplicationController
+
   before_action :set_package, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:index, :show, :edit, :update, :destroy, :select_origin, :new_hierarchical]
   before_action :find_information, only: [:show, :new, :edit, :create, :update, :new_hierarchical]
@@ -88,6 +94,93 @@ class PackagesController < ApplicationController
     @package = Package.new
     origin_package = Package.find(params[:id])
     @package.name = origin_package.name
+  end
+
+  def parse_channels
+    @package = Package.new
+    @package.name = params['name']
+    @package.cost = params['cost']
+    @package.link = params['link']
+
+    # MOVE TO SEPARATE MODULE
+    # load all channels from database
+    channels_in_db = []
+    Channel.all.each do |channel|
+        channels_in_db << channel.name.delete(' ').downcase
+    end
+
+    # load page
+    browser = Watir::Browser.new :firefox, profile: 'default', headless: true
+    # browser = Watir::Browser.new(:chrome, {:chromeOptions => {:args => ['--headless', '--window-size=1200x600']}})
+    # browser.goto("https://try.philo.com/")
+    # browser.goto("https://www.hulu.com/live-tv")
+    # browser.goto("https://tv.youtube.com/welcome/")
+    # browser.goto("https://www.fubo.tv/welcome/channels")
+    browser.goto(@package.link)
+
+    sleep 1
+    puts "Page loaded: %s" % browser.title
+    
+    document = Nokogiri::HTML(browser.body.html)
+    html_coder = HTMLEntities.new
+    html_channel_class = ""
+    html_channel_attr = ""
+    document.traverse do |node|
+        next unless node.is_a?(Nokogiri::XML::Element)
+        
+        alt = html_coder.decode(node['alt']).delete(' ').downcase
+        title = html_coder.decode(node['title']).delete(' ').downcase
+
+        if channels_in_db.include?(alt) 
+            puts "Class: %s, alt: %s" % [node['class'], node['alt']]
+            html_channel_class = node['class']
+            html_channel_attr = 'alt'
+            break
+        end
+
+        if channels_in_db.include?(title)
+            puts "Class: %s, title: %s" % [node['class'], node['title']]
+            html_channel_class = node['class']
+            html_channel_attr = 'title' 
+            break
+        end
+    end
+
+    # extract elements with class == <html_channel_class>
+    channels_in_page = []
+    document.traverse do |node|
+        next unless node.is_a?(Nokogiri::XML::Element)
+        
+        if node['class'] == html_channel_class
+            channels_in_page << html_coder.decode(node[html_channel_attr])
+        end
+    end
+
+    puts "Channels found on page: %s" % [channels_in_page]
+    
+    # Channels from DB
+    @channels = Channel.order(:name)
+    channel_objs = {}
+    @channels.each do |channel_obj|
+      channel_objs[channel_obj.name.delete(' ').downcase] = channel_obj
+    end
+
+    @package_channels = Array.new
+    channels_in_page.each do |channel|
+      @package_channels << channel_objs[channel.delete(' ').downcase]
+    end
+
+    puts "channels in DB && page" % @package_channels.length
+    i = 0
+    @package_channels.each do |channel|
+      unless channel.nil?
+        print "%s, " % channel.name
+        i += 1
+      end
+    end
+    puts "#%d" % [i]
+
+    render 'new'
   end
 
   private

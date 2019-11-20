@@ -67,8 +67,11 @@ function filterFunction3() {
       <%= f.text_field :name, placeholder: 'Enter package name', autofocus: true, class: 'form-control'%>
       <%= f.label :cost %>
       <%= f.text_field :cost, placeholder: 'Enter package cost', class: 'form-control'%>
+      
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
+      <%= link_to "FETCH CHANNELS", parse_channels_path(:name => "Philo", :cost => '20', :link => 'https://try.philo.com/') %>
+      
       <%= f.label :DVR do %>
       <%= f.check_box :DVR, class: "multi-checkbox" %>
         <span>DVR</span>
