@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  get '/channels/approve', to: 'channels#get_approve_list'
+  post '/channels/approve', to: 'channels#approve_channels'
   resources :devices
   resources :set_top_boxes
   resources :packages

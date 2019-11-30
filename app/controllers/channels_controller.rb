@@ -57,6 +57,35 @@ class ChannelsController < ApplicationController
     redirect_to channels_path
   end
 
+  # GET channels/approve
+  def get_approve_list
+    if cookies.key?(:channels_not_in_db)
+      puts "Channels to approve %s" % cookies[:channels_not_in_db]
+      @channels = cookies[:channels_not_in_db].split(",")
+    else 
+      puts "No channels to approve"
+    end
+
+    render 'show_approve'
+  end
+
+  # POST channels/approve
+  def approve_channels
+    puts "Channels to put in DB %s" % params[:channels]
+    params[:channels].each do |c|
+      @channel = Channel.new
+      @channel.name = c
+      @channel.save
+    end
+
+    if cookies.key?(:channels_not_in_db) and cookies.key?(:channels_in_db)
+      cookies[:channels_in_db] = cookies[:channels_in_db] + ',' + cookies[:channels_not_in_db]
+      cookies.delete :channels_not_in_db
+    end
+
+    redirect_to :controller => 'packages', :action => 'parse_channels'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_channel

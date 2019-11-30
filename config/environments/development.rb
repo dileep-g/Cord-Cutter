@@ -53,5 +53,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Enable Console logging
-  config.web_console.whitelisted_ips = '50.24.124.207'
+  config.web_console.whitelisted_ips = '165.91.12.135'
 end

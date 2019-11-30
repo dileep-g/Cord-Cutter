@@ -56,6 +56,12 @@ function filterFunction3() {
     }
   }
 }
+function fetch_channels() {
+  parse_url = '/package/parse_channels?name='+document.getElementById("package_name").value
+        + '&cost=' + document.getElementById("package_cost").value
+        + '&link=' + document.getElementById("package_link").value;
+  location.replace(parse_url);
+}
       </script>
     </head>  
     
@@ -70,8 +76,13 @@ function filterFunction3() {
       
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
-      <%= link_to "FETCH CHANNELS", parse_channels_path(:name => "Philo", :cost => '20', :link => 'https://try.philo.com/') %>
       
+      <%= link_to "FETCH CHANNELS", "", :onclick => "fetch_channels();return false;" %>
+      </br></br>
+      <% if cookies[:channels_not_in_db] != nil %>
+        <%= link_to "APPROVE CHANNELS (#"+@count_not_in_db+" not in DB)", "/channels/approve" %>
+      <% end %>
+      </br>
       <%= f.label :DVR do %>
       <%= f.check_box :DVR, class: "multi-checkbox" %>
         <span>DVR</span>

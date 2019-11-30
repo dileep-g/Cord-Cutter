@@ -98,15 +98,15 @@ class PackagesController < ApplicationController
 
   def parse_channels
     @package = Package.new
-    @package.name = params['name']
-    @package.cost = params['cost']
-    @package.link = params['link']
+    @package.name = params['name'] || cookies['package_name']
+    @package.cost = params['cost'] || cookies['package_cost']
+    @package.link = params['link'] || cookies['package_link']
 
     # MOVE TO SEPARATE MODULE
     # load all channels from database
-    channels_in_db = []
+    all_channels = []
     Channel.all.each do |channel|
-        channels_in_db << channel.name.delete(' ').downcase
+        all_channels << channel.name.delete(' ').downcase
     end
 
     # load page
@@ -131,14 +131,14 @@ class PackagesController < ApplicationController
         alt = html_coder.decode(node['alt']).delete(' ').downcase
         title = html_coder.decode(node['title']).delete(' ').downcase
 
-        if channels_in_db.include?(alt) 
+        if all_channels.include?(alt) 
             puts "Class: %s, alt: %s" % [node['class'], node['alt']]
             html_channel_class = node['class']
             html_channel_attr = 'alt'
             break
         end
 
-        if channels_in_db.include?(title)
+        if all_channels.include?(title)
             puts "Class: %s, title: %s" % [node['class'], node['title']]
             html_channel_class = node['class']
             html_channel_attr = 'title' 
@@ -165,9 +165,16 @@ class PackagesController < ApplicationController
       channel_objs[channel_obj.name.delete(' ').downcase] = channel_obj
     end
 
+    channels_in_db = Array.new
+    channels_not_in_db = Array.new
     @package_channels = Array.new
     channels_in_page.each do |channel|
-      @package_channels << channel_objs[channel.delete(' ').downcase]
+      if channel_objs.key?(channel.delete(' ').downcase)
+        @package_channels << channel_objs[channel.delete(' ').downcase]
+        channels_in_db << channel
+      else 
+        channels_not_in_db << channel
+      end    
     end
 
     puts "channels in DB && page" % @package_channels.length
@@ -180,6 +187,20 @@ class PackagesController < ApplicationController
     end
     puts "#%d" % [i]
 
+    puts "setting cookies"
+    cookies[:package_name] = {:value => @package.name, :expires => 1.hour.from_now}
+    cookies[:package_cost] = {:value => @package.cost, :expires => 1.hour.from_now}
+    cookies[:package_link] = {:value => @package.link, :expires => 1.hour.from_now}
+
+    if channels_in_db.length() > 0
+      cookies[:channels_in_db] = {:value => channels_in_db.join(","), :expires => 1.hour.from_now}
+    end
+    
+    if channels_not_in_db.length() > 0
+      cookies[:channels_not_in_db] = {:value => channels_not_in_db.join(","), :expires => 1.hour.from_now}
+      @count_not_in_db = channels_not_in_db.length().to_s
+    end
+    
     render 'new'
   end
 
