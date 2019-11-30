@@ -1,6 +1,11 @@
 <html>
       
     <head>
+    <style>
+      [id^="edit_channels_"] {
+        display: none;
+      }
+    </style>
       <script>
 function myFunction1() {
   document.getElementById("myDropdown1").classList.toggle("show");
@@ -20,6 +25,41 @@ function filterFunction1() {
     }
   }
 }
+function show_input_channel(pos) {
+  var channels_text = document.getElementById("channels_text_" + pos);
+  channels_text.style.display = "none"
+
+  var channel_box = document.getElementById("channels_" + pos);
+  channel_box.style.display = "none"
+
+  var input_box = document.getElementById("edit_channels_" + pos);
+  input_box.value = channels_text.textContent
+  input_box.style.display = "block"
+
+  var edit_channel_btn = document.getElementById("edit_channel_btn_" + pos);
+  edit_channel_btn.style.display = "none"
+
+  var ok_channel_btn = document.getElementById("ok_channel_btn_" + pos);
+  ok_channel_btn.style.display = "block"
+}
+
+function hide_input_channel(pos) {
+  var input_box = document.getElementById("edit_channels_" + pos);
+  input_box.style.display = "none"
+  
+  var channel_box = document.getElementById("channels_" + pos);
+  channel_box.style.display = "inline"
+
+  var edit_channel_btn = document.getElementById("edit_channel_btn_" + pos);
+  edit_channel_btn.style.display = "block"
+
+  var ok_channel_btn = document.getElementById("ok_channel_btn_" + pos);
+  ok_channel_btn.style.display = "none"
+
+  var channels_text = document.getElementById("channels_text_" + pos);
+  channels_text.textContent = input_box.value
+  channels_text.style.display = "inline"
+}
       </script>
 </head>  
 
@@ -32,27 +72,23 @@ function filterFunction1() {
 <% else %>
     <h3 class="title">Approve below channels</h3>
 
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_for(:approve_channels, url: '/channels/approve', method: 'POST') do |f| %>
-            <div class="wrapper dropdown-area">
-                <div class="btn-group">
-                    <button style = "width: 250px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Select the Channels <span class="caret"></span></button>
-                    <ul id="myDropdown1" style= "width: 250px !important; height: 225px; overflow-y: scroll;" class="dropdown-menu" role="listbox">
-                        <input type="text" placeholder="Search.." id="myInput1" onkeyup="filterFunction1()" class="search">
-                        <% @channels.each do |channel| %>  
-                        <li class="dropdown-list">
-                            <%= label_tag do %>
-                            <%= check_box_tag "channels[]", channel, true, class: "multi-checkbox"%>
-                            <%= channel %>
-                            <% end %>
-                        </li>
-                        <% end %>  
-                    </ul>
-                </div>
-            </div>
+    <div class="approve_form">
+      <%= form_for(:approve_channels, url: '/channels/approve', method: 'POST') do |f| %>
 
-            <%= f.submit "Approve", class: "btn btn-primary" %>
+        <% i=0 %>
+        <% @channels.each do |channel| %>  
+        <%= label_tag do %>
+        <%= check_box_tag "channels[#{i.to_s}]", channel, true, class: "multi-checkbox"%>
+        <%= content_tag :p, "#{channel}", :id => "channels_text_#{i.to_s}", :style => "display: inline;font-style: normal;" %>
+        <%= text_field_tag "edit_channels[#{i.to_s}]", "#{channel}" %>
         <% end %>
+        <%= content_tag :p, "Edit", :id => "edit_channel_btn_#{i.to_s}", :onclick => "show_input_channel(#{i.to_s});return false;" %>
+        <%= content_tag :p, "OK", :id => "ok_channel_btn_#{i.to_s}", :style => "display: none;", :onclick => "hide_input_channel(#{i.to_s});return false;" %>
+        <% i+= 1 %>
+        <% end %>  
+
+        <%= f.submit "Approve", class: "btn btn-primary" %>
+      <% end %>
     </div>
 <% end %>
 

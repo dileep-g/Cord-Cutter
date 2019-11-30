@@ -71,19 +71,20 @@ class ChannelsController < ApplicationController
 
   # POST channels/approve
   def approve_channels
-    puts "Channels to put in DB %s" % params[:channels]
-    params[:channels].each do |c|
-      @channel = Channel.new
-      @channel.name = c
-      @channel.save
-    end
+    render 'show_approve'
+    # puts "Channels to put in DB %s" % params[:channels]
+    # params[:channels].each do |c|
+    #   @channel = Channel.new
+    #   @channel.name = c
+    #   @channel.save
+    # end
 
-    if cookies.key?(:channels_not_in_db) and cookies.key?(:channels_in_db)
-      cookies[:channels_in_db] = cookies[:channels_in_db] + ',' + cookies[:channels_not_in_db]
-      cookies.delete :channels_not_in_db
-    end
+    # if cookies.key?(:channels_not_in_db) and cookies.key?(:channels_in_db)
+    #   cookies[:channels_in_db] = cookies[:channels_in_db] + ',' + cookies[:channels_not_in_db]
+    #   cookies.delete :channels_not_in_db
+    # end
 
-    redirect_to :controller => 'packages', :action => 'parse_channels'
+    # redirect_to :controller => 'packages', :action => 'parse_channels'
   end
 
   private
