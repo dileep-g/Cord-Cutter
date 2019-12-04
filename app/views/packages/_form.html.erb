@@ -77,12 +77,13 @@
 
       <%= f.label :name %>
       <%= f.text_field :name, placeholder: 'Enter package name', autofocus: true, class: 'form-control'%>
+      </br>
       <%= f.label :cost %>
       <%= f.text_field :cost, placeholder: 'Enter package cost', class: 'form-control'%>
-      
+      </br>
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
-      
+      </br>
       <%= link_to "FETCH CHANNELS", "", :onclick => "fetch_channels();return false;", :class => "btn btn-success", :style => "color: white;" %>
       </br>
       <div class="spinner" id="load_channels_spinner" style="display: none;">
