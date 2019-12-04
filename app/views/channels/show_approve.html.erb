@@ -2,64 +2,89 @@
       
     <head>
     <style>
-      [id^="edit_channels_"] {
-        display: none;
-      }
-    </style>
+        [id^="edit_channels_"] {
+          display: none;
+        }
+     
+        * {
+          box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 50%;
+          padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+          .column {
+            width: 100%;
+          }
+        }
+      </style>
       <script>
-function myFunction1() {
-  document.getElementById("myDropdown1").classList.toggle("show");
-}
-function filterFunction1() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput1");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown1");
-  li = div.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-function show_input_channel(pos) {
-  var channels_text = document.getElementById("channels_text_" + pos);
-  channels_text.style.display = "none"
+        function myFunction1() {
+          document.getElementById("myDropdown1").classList.toggle("show");
+        }
+        function filterFunction1() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput1");
+          filter = input.value.toUpperCase();
+          div = document.getElementById("myDropdown1");
+          li = div.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+            } else {
+              li[i].style.display = "none";
+            }
+          }
+        }
+        function show_input_channel(pos) {
+          var channels_text = document.getElementById("channels_text_" + pos);
+          channels_text.style.display = "none"
 
-  var channel_box = document.getElementById("channels_" + pos);
-  channel_box.style.display = "none"
+          var channel_box = document.getElementById("channels_" + pos);
+          channel_box.style.display = "none"
 
-  var input_box = document.getElementById("edit_channels_" + pos);
-  input_box.value = channels_text.textContent
-  input_box.style.display = "block"
+          var input_box = document.getElementById("edit_channels_" + pos);
+          input_box.value = channels_text.textContent
+          input_box.style.display = "block"
 
-  var edit_channel_btn = document.getElementById("edit_channel_btn_" + pos);
-  edit_channel_btn.style.display = "none"
+          var edit_channel_btn = document.getElementById("edit_channel_btn_" + pos);
+          edit_channel_btn.style.display = "none"
 
-  var ok_channel_btn = document.getElementById("ok_channel_btn_" + pos);
-  ok_channel_btn.style.display = "block"
-}
+          var ok_channel_btn = document.getElementById("ok_channel_btn_" + pos);
+          ok_channel_btn.style.display = "block"
+        }
 
-function hide_input_channel(pos) {
-  var input_box = document.getElementById("edit_channels_" + pos);
-  input_box.style.display = "none"
-  
-  var channel_box = document.getElementById("channels_" + pos);
-  channel_box.style.display = "inline"
+        function hide_input_channel(pos) {
+          var input_box = document.getElementById("edit_channels_" + pos);
+          input_box.style.display = "none"
+          
+          var channel_box = document.getElementById("channels_" + pos);
+          channel_box.style.display = "inline"
 
-  var edit_channel_btn = document.getElementById("edit_channel_btn_" + pos);
-  edit_channel_btn.style.display = "block"
+          var edit_channel_btn = document.getElementById("edit_channel_btn_" + pos);
+          edit_channel_btn.style.display = "block"
 
-  var ok_channel_btn = document.getElementById("ok_channel_btn_" + pos);
-  ok_channel_btn.style.display = "none"
+          var ok_channel_btn = document.getElementById("ok_channel_btn_" + pos);
+          ok_channel_btn.style.display = "none"
 
-  var channels_text = document.getElementById("channels_text_" + pos);
-  channels_text.textContent = input_box.value
-  channels_text.style.display = "inline"
-}
+          var channels_text = document.getElementById("channels_text_" + pos);
+          channels_text.textContent = input_box.value
+          channels_text.style.display = "inline"
+        }
       </script>
 </head>  
 
@@ -71,25 +96,58 @@ function hide_input_channel(pos) {
 <br></br>
 <% else %>
     <h3 class="title">Approve below channels</h3>
+    <!--
+    Columnized view 
+    Left: Channels to Approve
+    Right: Channels that already exits in DB
+    -->
+    <div class="row">
+      <!-- LEFT COLUMN-->
+      <div class="column" >
+        <h4> Channels to Approve </h4>
+        <%= form_for(:approve_channels, url: '/channels/approve', method: 'POST') do |f| %>
+          <div style="overflow-y:scroll; height:400px;">
+            <% i=0 %>
+            <% @channels.each do |channel| %>  
+            <%= label_tag do %>
+            <%= check_box_tag "channels[#{i.to_s}]", channel, true, class: "multi-checkbox"%>
+            <%= content_tag :p, "#{channel}", :id => "channels_text_#{i.to_s}", :style => "display: inline;font-style: normal;" %>
+            <%= text_field_tag "edit_channels[#{i.to_s}]", "#{channel}" %>
+            <% end %>
+            <%= content_tag :p, "Edit", :id => "edit_channel_btn_#{i.to_s}", :onclick => "show_input_channel(#{i.to_s});return false;" %>
+            <%= content_tag :p, "OK", :id => "ok_channel_btn_#{i.to_s}", :style => "display: none;", :onclick => "hide_input_channel(#{i.to_s});return false;" %>
+            <% i+= 1 %>
+            <% end %>  
+          </div>
 
-    <div class="approve_form">
-      <%= form_for(:approve_channels, url: '/channels/approve', method: 'POST') do |f| %>
-
-        <% i=0 %>
-        <% @channels.each do |channel| %>  
-        <%= label_tag do %>
-        <%= check_box_tag "channels[#{i.to_s}]", channel, true, class: "multi-checkbox"%>
-        <%= content_tag :p, "#{channel}", :id => "channels_text_#{i.to_s}", :style => "display: inline;font-style: normal;" %>
-        <%= text_field_tag "edit_channels[#{i.to_s}]", "#{channel}" %>
+          <%= f.submit "Approve", class: "btn btn-primary" %>
         <% end %>
-        <%= content_tag :p, "Edit", :id => "edit_channel_btn_#{i.to_s}", :onclick => "show_input_channel(#{i.to_s});return false;" %>
-        <%= content_tag :p, "OK", :id => "ok_channel_btn_#{i.to_s}", :style => "display: none;", :onclick => "hide_input_channel(#{i.to_s});return false;" %>
-        <% i+= 1 %>
-        <% end %>  
+      </div>
+      
+      <!-- RIGHT COLUMN -->
+      <div class="coulmn" >
+        <h4> Channels Found in DB </h4>
+        <div style="overflow-y:scroll; height:400px;">
+          <% if @all_channels_in_db != nil %>
+            <ul>
+              <table >
+                <tbody>
+                  <% @all_channels_in_db.each do |channel| %>
+                    <tr class="col-xs-12">
+                      <ul class="list-unstyled">
+                        <div class="col-xs-offset-0 col-xs-6 text-left">&diams; &nbsp;<span style="font-size: 13px"><%= channel.name %><br> <br/></span></div>
+                      </ul>  
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </ul>
+          <% end %>
+        </div>
+      </div>
 
-        <%= f.submit "Approve", class: "btn btn-primary" %>
-      <% end %>
     </div>
+    
 <% end %>
 
 </body>

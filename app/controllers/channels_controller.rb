@@ -66,6 +66,8 @@ class ChannelsController < ApplicationController
       puts "No channels to approve"
     end
 
+    @all_channels_in_db = Channel.order(:name)
+
     render 'show_approve'
   end
 
