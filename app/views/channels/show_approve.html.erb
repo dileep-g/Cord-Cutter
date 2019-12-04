@@ -85,6 +85,13 @@
           channels_text.textContent = input_box.value
           channels_text.style.display = "inline"
         }
+
+        function toggle(source) {
+          var $eles = $(":input[name^='channels']");
+          var checkboxes = $eles.get();
+          for(var i=0; i< checkboxes.length; i++)
+            checkboxes[i].checked = source.checked;
+        }
       </script>
 </head>  
 
@@ -106,6 +113,11 @@
       <div class="column" >
         <h4> Channels to Approve </h4> </br>
         <%= form_for(:approve_channels, url: '/channels/approve', method: 'POST') do |f| %>
+          <% if @channels != nil %>
+            <input type="checkbox" name="select_all" onClick="toggle(this)" style="width: 3%" checked> <b>Select All</b>
+            </br>
+          <% end %>
+          </br>
           <div style="overflow-y:scroll; height:400px;">
             <% i=0 %>
             <% @channels.each do |channel| %>  
@@ -127,7 +139,7 @@
       <!-- RIGHT COLUMN -->
       <div class="coulmn" >
         <h4> Channels Found in DB </h4></br>
-        <div style="overflow-y:scroll; height:400px;">
+        <div style="overflow-y:scroll; height:450px;">
           <% if @all_channels_in_db != nil %>
             <ul>
               <table >

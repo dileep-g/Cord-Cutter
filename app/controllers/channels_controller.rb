@@ -74,10 +74,12 @@ class ChannelsController < ApplicationController
   # POST channels/approve
   def approve_channels
     puts "Channels to put in DB %s" % params[:channels]
-    params[:channels].each do |k,v|
-      @channel = Channel.new
-      @channel.name = v
-      @channel.save
+    if !params[:channels].nil?
+      params[:channels].each do |k,v|
+        @channel = Channel.new
+        @channel.name = v
+        @channel.save
+      end
     end
 
     if cookies.key?(:channels_not_in_db) and cookies.key?(:channels_in_db)
