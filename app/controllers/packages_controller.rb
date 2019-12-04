@@ -102,7 +102,7 @@ class PackagesController < ApplicationController
     @package.cost = params['cost'] || cookies['package_cost']
     @package.link = params['link'] || cookies['package_link']
 
-    if @package.link? or @package.link.to_s.strip.empty?
+    if !@package.link? or @package.link.to_s.strip.empty?
       render 'new'
       return
     end
