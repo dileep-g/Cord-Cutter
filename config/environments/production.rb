@@ -88,4 +88,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  Selenium::WebDriver::Chrome.path = "/app/.apt/usr/bin/google-chrome"
+  Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 end

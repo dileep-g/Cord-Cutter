@@ -104,7 +104,7 @@
     <div class="row">
       <!-- LEFT COLUMN-->
       <div class="column" >
-        <h4> Channels to Approve </h4>
+        <h4> Channels to Approve </h4> </br>
         <%= form_for(:approve_channels, url: '/channels/approve', method: 'POST') do |f| %>
           <div style="overflow-y:scroll; height:400px;">
             <% i=0 %>
@@ -126,7 +126,7 @@
       
       <!-- RIGHT COLUMN -->
       <div class="coulmn" >
-        <h4> Channels Found in DB </h4>
+        <h4> Channels Found in DB </h4></br>
         <div style="overflow-y:scroll; height:400px;">
           <% if @all_channels_in_db != nil %>
             <ul>
