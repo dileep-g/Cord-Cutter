@@ -109,8 +109,15 @@ class PackagesController < ApplicationController
         all_channels << channel.name.delete(' ').downcase
     end
 
+    browser = nil
     # load page
-    browser = Watir::Browser.new :firefox, profile: 'default', headless: true
+    if Rails.env.production?
+      Selenium::WebDriver::Chrome.path = "/app/.apt/usr/bin/google-chrome"
+      Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
+      browser = Watir::Browser.new :chrome
+    else
+      browser = Watir::Browser.new :firefox, profile: 'default', headless: true
+    end
     # browser = Watir::Browser.new(:chrome, {:chromeOptions => {:args => ['--headless', '--window-size=1200x600']}})
     # browser.goto("https://try.philo.com/")
     # browser.goto("https://www.hulu.com/live-tv")
