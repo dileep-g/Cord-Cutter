@@ -7,7 +7,7 @@ class PackagesController < ApplicationController
 
   before_action :set_package, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:index, :show, :edit, :update, :destroy, :select_origin, :new_hierarchical]
-  before_action :find_information, only: [:show, :new, :edit, :create, :update, :new_hierarchical]
+  before_action :find_information, only: [:show, :new, :edit, :create, :update, :new_hierarchical, :parse_channels]
   before_action :find_relationship, only: [:show, :edit, :update, :new_hierarchical]
   # GET /packages
   # GET /packages.json

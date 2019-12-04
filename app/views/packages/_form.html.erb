@@ -1,67 +1,73 @@
     <html>
       
     <head>
+      <style>
+      </style>
+
       <script>
-function myFunction1() {
-  document.getElementById("myDropdown1").classList.toggle("show");
-}
-function filterFunction1() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput1");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown1");
-  li = div.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-function myFunction2() {
-  document.getElementById("myDropdown2").classList.toggle("show");
-}
-function filterFunction2() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput2");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown2");
-  li = div.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-function myFunction3() {
-  document.getElementById("myDropdown3").classList.toggle("show");
-}
-function filterFunction3() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput3");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown3");
-  li = div.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-function fetch_channels() {
-  parse_url = '/package/parse_channels?name='+document.getElementById("package_name").value
-        + '&cost=' + document.getElementById("package_cost").value
-        + '&link=' + document.getElementById("package_link").value;
-  location.replace(parse_url);
-}
+        function myFunction1() {
+          document.getElementById("myDropdown1").classList.toggle("show");
+        }
+        function filterFunction1() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput1");
+          filter = input.value.toUpperCase();
+          div = document.getElementById("myDropdown1");
+          li = div.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+            } else {
+              li[i].style.display = "none";
+            }
+          }
+        }
+        function myFunction2() {
+          document.getElementById("myDropdown2").classList.toggle("show");
+        }
+        function filterFunction2() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput2");
+          filter = input.value.toUpperCase();
+          div = document.getElementById("myDropdown2");
+          li = div.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+            } else {
+              li[i].style.display = "none";
+            }
+          }
+        }
+        function myFunction3() {
+          document.getElementById("myDropdown3").classList.toggle("show");
+        }
+        function filterFunction3() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput3");
+          filter = input.value.toUpperCase();
+          div = document.getElementById("myDropdown3");
+          li = div.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+            } else {
+              li[i].style.display = "none";
+            }
+          }
+        }
+        function fetch_channels() {
+          var load_channels_spinner = document.getElementById("load_channels_spinner");
+          load_channels_spinner.style.display = "block";
+
+          parse_url = '/package/parse_channels?name='+document.getElementById("package_name").value
+                + '&cost=' + document.getElementById("package_cost").value
+                + '&link=' + document.getElementById("package_link").value;
+          location.replace(parse_url);
+        }
       </script>
     </head>  
     
@@ -77,10 +83,18 @@ function fetch_channels() {
       <%= f.label :link %>
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
       
-      <%= link_to "FETCH CHANNELS", "", :onclick => "fetch_channels();return false;" %>
-      </br></br>
-      <% if cookies[:channels_not_in_db] != nil %>
-        <%= link_to "APPROVE CHANNELS (#"+@count_not_in_db+" not in DB)", "/channels/approve" %>
+      <%= link_to "FETCH CHANNELS", "", :onclick => "fetch_channels();return false;", :class => "btn btn-success", :style => "color: white;" %>
+      </br>
+      <div class="spinner" id="load_channels_spinner" style="display: none;">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+      </br>
+      <% if cookies[:channels_not_in_db] != nil and @count_not_in_db != nil %>
+        </br>
+        <%= link_to "APPROVE NEW CHANNELS (#"+@count_not_in_db+")", "/channels/approve", :class => "btn btn-warning" %>
+        </br>
       <% end %>
       </br>
       <%= f.label :DVR do %>
@@ -188,6 +202,7 @@ function fetch_channels() {
       <%= f.submit "Submit", class: "btn btn-primary" %>
       
     <% end %>
+
     
     </body>
     </html>
