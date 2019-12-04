@@ -74,9 +74,9 @@ class ChannelsController < ApplicationController
   # POST channels/approve
   def approve_channels
     puts "Channels to put in DB %s" % params[:channels]
-    params[:channels].each do |c|
+    params[:channels].each do |k,v|
       @channel = Channel.new
-      @channel.name = c
+      @channel.name = v
       @channel.save
     end
 
