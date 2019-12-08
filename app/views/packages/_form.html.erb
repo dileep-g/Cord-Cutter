@@ -85,6 +85,7 @@
       <%= f.text_field :link, placeholder: 'Enter package link', class: 'form-control'%>
       </br>
       <%= link_to "FETCH CHANNELS", "", :onclick => "fetch_channels();return false;", :class => "btn btn-success", :style => "color: white;" %>
+      <p><i>Click the above button to read and load channels from the given Link</i></p>
       </br>
       <div class="spinner" id="load_channels_spinner" style="display: none;">
         <div class="bounce1"></div>
@@ -94,7 +95,8 @@
       </br>
       <% if cookies[:channels_not_in_db] != nil and @count_not_in_db != nil %>
         </br>
-        <%= link_to "APPROVE NEW CHANNELS (#"+@count_not_in_db+")", "/channels/approve", :class => "btn btn-warning" %>
+        <%= link_to "REVIEW NEW CHANNELS (#"+@count_not_in_db+")", "/channels/approve", :class => "btn btn-warning", :style => "color: white;" %>
+        <p><i>Click the above button to review new channels and approve them to add to application Database. It would not add those new channels to package without reviewing and approving them.</i></p>
         </br>
       <% end %>
       </br>

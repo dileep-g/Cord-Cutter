@@ -126,8 +126,8 @@
             <%= content_tag :p, "#{channel}", :id => "channels_text_#{i.to_s}", :style => "display: inline;font-style: normal;" %>
             <%= text_field_tag "edit_channels[#{i.to_s}]", "#{channel}" %>
             <% end %>
-            <%= content_tag :p, "Edit", :id => "edit_channel_btn_#{i.to_s}", :onclick => "show_input_channel(#{i.to_s});return false;", :style => "color: blue;" %>
-            <%= content_tag :p, "OK", :id => "ok_channel_btn_#{i.to_s}", :style => "display: none; color: blue;", :onclick => "hide_input_channel(#{i.to_s});return false;" %>
+            <%= content_tag :p, "Edit", :id => "edit_channel_btn_#{i.to_s}", :onclick => "show_input_channel(#{i.to_s});return false;", :style => "color: #2571DE;font-weight: bold;" %>
+            <%= content_tag :p, "OK", :id => "ok_channel_btn_#{i.to_s}", :style => "display: none; color: #279A0E; font-weight: bold;", :onclick => "hide_input_channel(#{i.to_s});return false;" %>
             <% i+= 1 %>
             <% end %>  
           </div>
