@@ -1,9 +1,9 @@
 GIT
-  remote: git://github.com/doabit/semantic-ui-sass.git
-  revision: 6c8e8dabb46b50fb5e01a4766a63c362501f0dc8
+  remote: https://github.com/doabit/semantic-ui-sass.git
+  revision: 30009213cb570b7710971d82c63da83f8ca04e80
   specs:
-    semantic-ui-sass (2.4.0.1)
-      sass (>= 3.2)
+    semantic-ui-sass (2.4.4.0)
+      sassc
 
 GEM
   remote: https://rubygems.org/
@@ -167,7 +167,8 @@ GEM
       omniauth (~> 1.9)
     pg (0.20.0)
     public_suffix (3.0.3)
-    puma (3.9.1)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -318,7 +319,7 @@ DEPENDENCIES
   listen (= 3.1.5)
   omniauth-google-oauth2
   pg (= 0.20.0)
-  puma (= 3.9.1)
+  puma (= 4.3.12)
   rails (= 5.1.6)
   rails-controller-testing
   rspec
